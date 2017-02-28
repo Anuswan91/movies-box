@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228213835) do
+ActiveRecord::Schema.define(version: 20170228221707) do
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 20170228213835) do
   end
 
   add_index "movies", ["format_id"], name: "index_movies_on_format_id"
+
+  create_table "movies_persons", id: false, force: :cascade do |t|
+    t.integer "movie_id",  null: false
+    t.integer "person_id", null: false
+  end
+
+  add_index "movies_persons", ["movie_id"], name: "index_movies_persons_on_movie_id"
+  add_index "movies_persons", ["person_id"], name: "index_movies_persons_on_person_id"
 
   create_table "movies_subtitles", id: false, force: :cascade do |t|
     t.integer "movie_id",    null: false
