@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228170303) do
+ActiveRecord::Schema.define(version: 20170228213835) do
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.string "name_long"
   end
+
+  create_table "countries_movies", id: false, force: :cascade do |t|
+    t.integer "movie_id",   null: false
+    t.integer "country_id", null: false
+  end
+
+  add_index "countries_movies", ["country_id"], name: "index_countries_movies_on_country_id"
+  add_index "countries_movies", ["movie_id"], name: "index_countries_movies_on_movie_id"
 
   create_table "formats", force: :cascade do |t|
     t.string "name"
@@ -26,9 +34,25 @@ ActiveRecord::Schema.define(version: 20170228170303) do
     t.string "name"
   end
 
+  create_table "genres_movies", id: false, force: :cascade do |t|
+    t.integer "movie_id", null: false
+    t.integer "genre_id", null: false
+  end
+
+  add_index "genres_movies", ["genre_id"], name: "index_genres_movies_on_genre_id"
+  add_index "genres_movies", ["movie_id"], name: "index_genres_movies_on_movie_id"
+
   create_table "languages", force: :cascade do |t|
     t.string "name"
   end
+
+  create_table "languages_movies", id: false, force: :cascade do |t|
+    t.integer "movie_id",    null: false
+    t.integer "language_id", null: false
+  end
+
+  add_index "languages_movies", ["language_id"], name: "index_languages_movies_on_language_id"
+  add_index "languages_movies", ["movie_id"], name: "index_languages_movies_on_movie_id"
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -44,6 +68,14 @@ ActiveRecord::Schema.define(version: 20170228170303) do
   end
 
   add_index "movies", ["format_id"], name: "index_movies_on_format_id"
+
+  create_table "movies_subtitles", id: false, force: :cascade do |t|
+    t.integer "movie_id",    null: false
+    t.integer "subtitle_id", null: false
+  end
+
+  add_index "movies_subtitles", ["movie_id"], name: "index_movies_subtitles_on_movie_id"
+  add_index "movies_subtitles", ["subtitle_id"], name: "index_movies_subtitles_on_subtitle_id"
 
   create_table "persons", force: :cascade do |t|
     t.string "name"
