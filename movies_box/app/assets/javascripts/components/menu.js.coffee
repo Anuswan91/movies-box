@@ -33,20 +33,26 @@
             React.DOM.ul
               className: 'nav navbar-nav'
               React.DOM.li
-                className: 'active'
+                className: 'el-menu'
                 React.DOM.a
                   href: '#'
-                  'Movies'
                   React.DOM.span
-                    className: 'sr-only'
-                    '(current)'
+                    className: 'glyphicon glyphicon-film'
+                    ariaHidden: 'true'
+                  ' Movies'
               React.DOM.li
                 className: 'el-menu'
                 React.DOM.a
                   href: '#'
-                  'Help'
+                  React.DOM.span
+                    className: 'glyphicon glyphicon-question-sign'
+                    ariaHidden: 'true'
+                  ' Help'
               React.DOM.li
                 className: 'el-menu'
                 React.DOM.a
                   href: '#'
-                  'About'
+                  React.DOM.span
+                    className: 'glyphicon glyphicon-info-sign'
+                    ariaHidden: 'true'
+                  ' About'
