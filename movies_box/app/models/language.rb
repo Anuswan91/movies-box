@@ -1,5 +1,6 @@
 class Language < ActiveRecord::Base
-  has_and_belongs_to_many :movies
+  has_many :movie_languages
+  has_many :movies, through: :movie_languages
 
   validates :name, presence: {
     message: "Name must be informed."

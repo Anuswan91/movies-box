@@ -1,4 +1,8 @@
 @MoviesList = React.createClass
+  getInitialState: ->
+    movies: @props.data
+  getDefaultProps: ->
+    movies: []
   render: ->
     React.DOM.div
       className: 'movies-list'
@@ -7,4 +11,6 @@
         'List Movies'
       React.DOM.div
         className: 'row'
-        React.createElement MoviePreview
+        console.log(@state.movies)
+        for movie in @state.movies
+          React.createElement MoviePreview, key: movie.id, movie: movie

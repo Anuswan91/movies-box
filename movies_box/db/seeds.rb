@@ -114,6 +114,11 @@ Language.create :name => "Ukrainian"
 # Less-Common Languages
 # ...
 
+# Jobs
+Job.create :name => "Actor"
+Job.create :name => "Director"
+Job.create :name => "Writer"
+
 # Subtitles
 Subtitle.create :name => "VO"
 Subtitle.create :name => "VF"

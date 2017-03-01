@@ -1,5 +1,6 @@
 class Subtitle < ActiveRecord::Base
-  has_and_belongs_to_many :movies
+  has_many :movie_subtitles
+  has_many :movies, through: :movie_subtitles
 
   validates :name, presence: {
     message: "Name must be informed."

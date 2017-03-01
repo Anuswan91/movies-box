@@ -11,20 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228214038) do
+ActiveRecord::Schema.define(version: 20170301165316) do
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.string "name_long"
   end
-
-  create_table "countries_movies", id: false, force: :cascade do |t|
-    t.integer "movie_id",   null: false
-    t.integer "country_id", null: false
-  end
-
-  add_index "countries_movies", ["country_id"], name: "index_countries_movies_on_country_id"
-  add_index "countries_movies", ["movie_id"], name: "index_countries_movies_on_movie_id"
 
   create_table "formats", force: :cascade do |t|
     t.string "name"
@@ -34,25 +26,65 @@ ActiveRecord::Schema.define(version: 20170228214038) do
     t.string "name"
   end
 
-  create_table "genres_movies", id: false, force: :cascade do |t|
-    t.integer "movie_id", null: false
-    t.integer "genre_id", null: false
+  create_table "jobs", force: :cascade do |t|
+    t.string "name"
   end
-
-  add_index "genres_movies", ["genre_id"], name: "index_genres_movies_on_genre_id"
-  add_index "genres_movies", ["movie_id"], name: "index_genres_movies_on_movie_id"
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "languages_movies", id: false, force: :cascade do |t|
-    t.integer "movie_id",    null: false
-    t.integer "language_id", null: false
+  create_table "movie_countries", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "languages_movies", ["language_id"], name: "index_languages_movies_on_language_id"
-  add_index "languages_movies", ["movie_id"], name: "index_languages_movies_on_movie_id"
+  add_index "movie_countries", ["country_id"], name: "index_movie_countries_on_country_id"
+  add_index "movie_countries", ["movie_id"], name: "index_movie_countries_on_movie_id"
+
+  create_table "movie_genres", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "movie_genres", ["genre_id"], name: "index_movie_genres_on_genre_id"
+  add_index "movie_genres", ["movie_id"], name: "index_movie_genres_on_movie_id"
+
+  create_table "movie_languages", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "language_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "movie_languages", ["language_id"], name: "index_movie_languages_on_language_id"
+  add_index "movie_languages", ["movie_id"], name: "index_movie_languages_on_movie_id"
+
+  create_table "movie_people", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "job_id"
+  end
+
+  add_index "movie_people", ["job_id"], name: "index_movie_people_on_job_id"
+  add_index "movie_people", ["movie_id"], name: "index_movie_people_on_movie_id"
+  add_index "movie_people", ["person_id"], name: "index_movie_people_on_person_id"
+
+  create_table "movie_subtitles", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "subtitle_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "movie_subtitles", ["movie_id"], name: "index_movie_subtitles_on_movie_id"
+  add_index "movie_subtitles", ["subtitle_id"], name: "index_movie_subtitles_on_subtitle_id"
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -69,24 +101,10 @@ ActiveRecord::Schema.define(version: 20170228214038) do
 
   add_index "movies", ["format_id"], name: "index_movies_on_format_id"
 
-  create_table "movies_persons", id: false, force: :cascade do |t|
-    t.integer "movie_id",  null: false
-    t.integer "person_id", null: false
-  end
-
-  add_index "movies_persons", ["movie_id"], name: "index_movies_persons_on_movie_id"
-  add_index "movies_persons", ["person_id"], name: "index_movies_persons_on_person_id"
-
-  create_table "movies_subtitles", id: false, force: :cascade do |t|
-    t.integer "movie_id",    null: false
-    t.integer "subtitle_id", null: false
-  end
-
-  add_index "movies_subtitles", ["movie_id"], name: "index_movies_subtitles_on_movie_id"
-  add_index "movies_subtitles", ["subtitle_id"], name: "index_movies_subtitles_on_subtitle_id"
-
-  create_table "persons", force: :cascade do |t|
-    t.string "name"
+  create_table "people", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subtitles", force: :cascade do |t|

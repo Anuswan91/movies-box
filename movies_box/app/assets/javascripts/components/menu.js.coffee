@@ -11,9 +11,9 @@
             React.DOM.button
               type: 'button'
               className: 'collapsed navbar-toggle'
-              datatoggle: 'collapse'
-              datatarget: '#bs-example-navbar-collapse-1'
-              ariaexpanded: 'false'
+              # dataToggle: 'collapse'
+              # dataTarget: '#bs-example-navbar-collapse-1'
+              # ariaExpanded: 'false'
               React.DOM.span
                 className: 'sr-only'
                 'Toggle navigation'
@@ -25,8 +25,8 @@
                 className: 'icon-bar'
             React.DOM.a
               className: 'navbar-brand'
-              href: "#"
-              'Brand'
+              href: "/home"
+              'MoviesBox'
           React.DOM.div
             className: 'collapse navbar-collapse'
             id: 'bs-example-navbar-collapse-1'
@@ -35,24 +35,24 @@
               React.DOM.li
                 className: 'el-menu'
                 React.DOM.a
-                  href: '#'
+                  href: '/movies'
                   React.DOM.span
                     className: 'glyphicon glyphicon-film'
-                    ariaHidden: 'true'
+                    # ariaHidden: 'true'
                   ' Movies'
               React.DOM.li
                 className: 'el-menu'
                 React.DOM.a
-                  href: '#'
+                  href: '/help'
                   React.DOM.span
                     className: 'glyphicon glyphicon-question-sign'
-                    ariaHidden: 'true'
+                    # ariaHidden: 'true'
                   ' Help'
               React.DOM.li
                 className: 'el-menu'
                 React.DOM.a
-                  href: '#'
+                  href: '/about'
                   React.DOM.span
                     className: 'glyphicon glyphicon-info-sign'
-                    ariaHidden: 'true'
+                    # ariaHidden: 'true'
                   ' About'

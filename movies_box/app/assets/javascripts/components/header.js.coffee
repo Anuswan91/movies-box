@@ -5,5 +5,7 @@
       React.DOM.div
         className: 'jumbotron text-center'
         React.DOM.h1 null, 'MoviesBox'
-        React.DOM.p null, 'Application to manage my movies.'
+        React.DOM.p
+          className: 'text-muted'
+          'Application to manage my movies.'
       React.createElement Menu
