@@ -1,4 +1,4 @@
-class AddFormatToMovies < ActiveRecord::Migration
+class AddFormatToMovies2 < ActiveRecord::Migration
   def change
     add_column :movies, :format_id, :integer
     add_index :movies, :format_id

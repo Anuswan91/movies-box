@@ -4,11 +4,13 @@
       className: 'col-sm-6 col-md-4'
       React.DOM.div
         className: 'thumbnail'
-        React.DOM.img
-          src: 'images/example.jpg'
-          alt: 'Example'
-          height: '150'
-          width: '150'
+        React.DOM.a
+          href: '/movies/' + @props.movie.id
+          React.DOM.img
+            src: 'images/example.jpg'
+            alt: 'Example'
+            height: '150'
+            width: '150'
         React.DOM.div
           className: 'caption'
           React.DOM.h3
@@ -39,7 +41,7 @@
             React.DOM.a
               className: 'btn btn-primary'
               role: 'button'
-              href: '#'
+              href: '/movies/' + @props.movie.id
               React.DOM.span
                 className: 'glyphicon glyphicon-eye-open'
             React.DOM.a

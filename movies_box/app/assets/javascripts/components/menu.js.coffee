@@ -25,7 +25,7 @@
                 className: 'icon-bar'
             React.DOM.a
               className: 'navbar-brand'
-              href: "/home"
+              href: "/"
               'MoviesBox'
           React.DOM.div
             className: 'collapse navbar-collapse'

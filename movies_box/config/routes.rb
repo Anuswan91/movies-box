@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   resources :movies
   resources :movies
 
-  get 'home' => 'movies#home'
+  root 'movies#home'
   get 'movies' => 'movies#index'
+  get 'movies/:id' => 'movies#show'
   get 'help' => 'movies#help'
   get 'about' => 'movies#about'
   # The priority is based upon order of creation: first created -> highest priority.
