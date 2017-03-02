@@ -8,13 +8,11 @@ class MoviesController < ApplicationController
   end
 
   def new
-    # @movie = Movie.new(movie_params)
-    #
-    # if @movie.save
-    #   render json: @movie
-    # else
-    #   render json: @movie.errors, status: :unprocessable_entity
-    # end
+    @formats = Format.all
+    @genres = Genre.all
+    @countries = Country.all
+    @languages = Language.all
+    @subtitles = Subtitle.all
   end
 
   def create
@@ -25,6 +23,7 @@ class MoviesController < ApplicationController
     else
       render json: @movie.errors, status: :unprocessable_entity
     end
+    # redirect_to "/movies"
   end
 
   def home
@@ -45,7 +44,7 @@ class MoviesController < ApplicationController
                                     :plot,
                                     :rating,
                                     :added,
-                                    # :watched,
+                                    :watched,
                                     :format_id)
     end
 end

@@ -11,6 +11,5 @@
         'List Movies'
       React.DOM.div
         className: 'row'
-        console.log(@state.movies)
         for movie in @state.movies
           React.createElement MoviePreview, key: movie.id, movie: movie
