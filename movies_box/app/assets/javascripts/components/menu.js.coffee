@@ -32,6 +32,25 @@
             id: 'bs-example-navbar-collapse-1'
             React.DOM.ul
               className: 'nav navbar-nav'
+              # React.DOM.li
+              #   className: 'dropdown'
+              #   React.DOM.a
+              #     className: 'dropdown-toggle'
+              #     # data-toggle: 'dropdown'
+              #     href: '#'
+              #     role: 'button'
+              #     # aria-haspopup: 'true'
+              #     # aria-expanded: 'false'
+              #     'dropdown'
+              #     React.DOM.span
+              #       className: 'caret'
+              #   React.DOM.ul
+              #     className: 'dropdown-menu'
+              #     React.DOM.li
+              #       className: 'el-menu'
+              #       React.DOM.a
+              #         href: '#'
+              #         'Add'
               React.DOM.li
                 className: 'el-menu'
                 React.DOM.a
@@ -40,6 +59,14 @@
                     className: 'glyphicon glyphicon-film'
                     # ariaHidden: 'true'
                   ' Movies'
+              React.DOM.li
+                className: 'el-menu'
+                React.DOM.a
+                  href: '/movies/new'
+                  React.DOM.span
+                    className: 'glyphicon glyphicon-plus'
+                    # ariaHidden: 'true'
+                  ' Add Movie'
               React.DOM.li
                 className: 'el-menu'
                 React.DOM.a

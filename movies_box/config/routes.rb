@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'movies#home'
   get 'movies' => 'movies#index'
   get 'movies/:id' => 'movies#show'
+  get 'movies/new' => 'movies#new'
+  # post 'movies/new' => 'movies#create'
   get 'help' => 'movies#help'
   get 'about' => 'movies#about'
   # The priority is based upon order of creation: first created -> highest priority.
