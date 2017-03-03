@@ -1,8 +1,7 @@
 @MovieComplete = React.createClass
   getInitialState: ->
     movie: @props.movie
-  # getDefaultProps: ->
-  #   movie: ''
+    genres: @props.genres
   render: ->
     React.DOM.div
       className: 'movie-complete'
@@ -20,16 +19,23 @@
             @props.movie.title
           React.DOM.p
             className: 'movie-preview-desc'
-            'Released : ' + @state.movie.released
+            "Released : #{ @state.movie.released }"
           React.DOM.p
             className: 'movie-preview-desc'
-            'Runtime : ' + @state.movie.runtime + "min"
+            "Runtime : #{ @state.movie.runtime }min"
           React.DOM.p
             className: 'movie-preview-desc'
-            'Rating : ' + @state.movie.rating
+            "Rating : #{ @state.movie.rating }"
+          React.DOM.ul
+            className: 'list-group'
+            for genre in @state.genres
+              React.DOM.li
+                className: 'list-group-item'
+                key: genre.id
+                "#{ genre.name }"
           React.DOM.p
             className: 'movie-preview-desc'
-            'Watched : ' + @state.movie.watched
+            "Watched : #{ @state.movie.watched }"
           React.DOM.p
             className: 'buttons-preview'
             React.DOM.a

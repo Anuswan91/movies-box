@@ -1,29 +1,34 @@
 @NewMovieForm = React.createClass
   getInitialState: ->
     title: ''
-    released: ''
-    runtime: ''
-    plot: ''
-    rating: ''
-    added: ''
-    watched: ''
-    format_id: ''
-    genres: []
+    released: '1995-11-11'
+    runtime: '46'
+    plot: 'sfdsfsd'
+    rating: '3.2'
+    added: '2017-02-28'
+    watched: 'false'
+    format_id: '2'
+    image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjI1MjkzMjczMV5BMl5BanBnXkFtZTgwNDk4NjYyMTI@._V1_SX300.jpg'
+    genres: [3,7,10]
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
-    console.log(@state)
   handleChangeGenres: (e) ->
-    name = e.target.name
-    genres = @state.genres
-    # genres.push( e.target.value )
-    @setState genres: e.target.value
-    console.log(e.target.value)
+    genres = @state.genres # TODO make a function which do this step
+    newValue = e.target.value
+    if genres.includes( newValue )
+      genres.splice( genres.indexOf( newValue ), 1 )
+      @setState genres: genres
+    else
+      genres.push( newValue )
+      @setState genres: genres
   valid: ->
-    @state.title && @state.released && @state.runtime && @state.plot && @state.rating && @state.added && @state.watched && @state.format_id
+    @state.title && @state.released && @state.runtime && @state.plot && @state.rating && @state.added && @state.watched && @state.format_id && @state.image
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '/movies#create', { movie: @state }, (data) =>
+      console.log(@state)
+      console.log(data)
       @setState @getInitialState()
     , 'JSON'
   render: ->
@@ -52,6 +57,7 @@
             onChange: @handleChangeGenres
             for genre in @props.genres
               React.DOM.option
+                key: genre.id
                 value: genre.id
                 genre.name
         React.DOM.div
@@ -72,6 +78,15 @@
             placeholder: 'Runtime'
             name: 'runtime'
             value: @state.runtime
+            onChange: @handleChange
+        React.DOM.div
+          className: 'form-group'
+          React.DOM.input
+            type: 'url'
+            className: 'form-control'
+            placeholder: 'Poster'
+            name: 'image'
+            value: @state.image
             onChange: @handleChange
         React.DOM.div
           className: 'form-group'
@@ -146,6 +161,7 @@
             onChange: @handleChange
             for format in @props.formats
               React.DOM.option
+                key: format.id
                 value: format.id
                 format.name
         React.DOM.button

@@ -5,6 +5,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @genres = @movie.genres
   end
 
   def new
@@ -17,6 +18,11 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
+    idMovie = Movie.last.id # TODO check if we can get @movie.id
+  
+    array_params[:genres].each do |genre|
+      MovieGenre.create movie_id: idMovie, genre_id: genre
+    end
 
     if @movie.save
       render json: @movie
@@ -45,6 +51,11 @@ class MoviesController < ApplicationController
                                     :rating,
                                     :added,
                                     :watched,
-                                    :format_id)
+                                    :format_id,
+                                    :image)
+    end
+
+    def array_params
+      params.require(:movie).permit(:genres => [])
     end
 end
