@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @genres = @movie.genres
+    @countries = @movie.countries
   end
 
   def new
@@ -18,16 +19,20 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    idMovie = Movie.last.id # TODO check if we can get @movie.id
-  
-    array_params[:genres].each do |genre|
-      MovieGenre.create movie_id: idMovie, genre_id: genre
-    end
 
     if @movie.save
       render json: @movie
     else
       render json: @movie.errors, status: :unprocessable_entity
+    end
+    idMovie = Movie.last.id # TODO check if we can get @movie.id
+
+    array_params[:genres].each do |genre|
+      MovieGenre.create movie_id: idMovie, genre_id: genre
+    end
+
+    array_params[:countries].each do |country|
+      MovieCountry.create movie_id: idMovie, country_id: country
     end
     # redirect_to "/movies"
   end
@@ -56,6 +61,7 @@ class MoviesController < ApplicationController
     end
 
     def array_params
-      params.require(:movie).permit(:genres => [])
+      params.require(:movie).permit(:genres => [],
+                                    :countries => [])
     end
 end

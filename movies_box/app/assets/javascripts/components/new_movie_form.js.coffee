@@ -10,6 +10,7 @@
     format_id: '2'
     image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjI1MjkzMjczMV5BMl5BanBnXkFtZTgwNDk4NjYyMTI@._V1_SX300.jpg'
     genres: [3,7,10]
+    countries: [5,2,3]
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
@@ -22,6 +23,15 @@
     else
       genres.push( newValue )
       @setState genres: genres
+  handleChangeCountries: (e) ->
+    countries = @state.countries
+    newValue = e.target.value
+    if countries.includes( newValue )
+      countries.splice( countries.indexOf( newValue ), 1 )
+      @setState countries: countries
+    else
+      countries.push( newValue )
+      @setState countries: countries
   valid: ->
     @state.title && @state.released && @state.runtime && @state.plot && @state.rating && @state.added && @state.watched && @state.format_id && @state.image
   handleSubmit: (e) ->
@@ -69,6 +79,19 @@
             name: 'released'
             value: @state.released
             onChange: @handleChange
+        React.DOM.div
+          className: 'form-group'
+          React.DOM.select
+            multiple: 'true'
+            className: 'form-control'
+            name: 'countries'
+            value: @state.countries
+            onChange: @handleChangeCountries
+            for country in @props.countries
+              React.DOM.option
+                key: country.id
+                value: country.id
+                country.name
         React.DOM.div
           className: 'form-group'
           React.DOM.input

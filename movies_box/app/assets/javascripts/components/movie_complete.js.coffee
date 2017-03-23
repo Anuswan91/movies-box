@@ -2,6 +2,7 @@
   getInitialState: ->
     movie: @props.movie
     genres: @props.genres
+    countries: @props.countries
   render: ->
     React.DOM.div
       className: 'movie-complete'
@@ -36,6 +37,13 @@
           React.DOM.p
             className: 'movie-preview-desc'
             "Watched : #{ @state.movie.watched }"
+          React.DOM.ul
+            className: 'list-group'
+            for country in @state.countries
+              React.DOM.li
+                className: 'list-group-item'
+                key: country.id
+                "#{ country.name }"
           React.DOM.p
             className: 'buttons-preview'
             React.DOM.a
