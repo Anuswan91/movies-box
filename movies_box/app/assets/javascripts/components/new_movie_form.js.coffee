@@ -9,8 +9,8 @@
     watched: 'false'
     format_id: '2'
     image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjI1MjkzMjczMV5BMl5BanBnXkFtZTgwNDk4NjYyMTI@._V1_SX300.jpg'
-    genres: [3,7,10]
-    countries: [5,2,3]
+    genres: []
+    countries: []
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
