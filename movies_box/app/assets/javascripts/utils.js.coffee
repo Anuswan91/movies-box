@@ -4,6 +4,3 @@
   else
     array.push( newValue )
   return array
-
-@getPoster = (url) ->
-  return '../images/example.jpg'

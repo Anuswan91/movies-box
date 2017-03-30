@@ -10,11 +10,12 @@
       className: 'movie-complete'
       React.DOM.div
         className: 'jumbotron text-center'
-        React.DOM.img
-          src: getPoster(@state.movie.image)
-          alt: @state.movie.title
-          # height: '150'
-          # width: '150'
+        # React.DOM.img
+        #   src: getPoster(@state.movie.image)
+        #   alt: @state.movie.title
+        #   # height: '150'
+        #   # width: '150'
+        React.createElement Poster, title: @state.movie.title, url: @state.movie.image
         React.DOM.div
           className: 'description'
           React.DOM.h3
