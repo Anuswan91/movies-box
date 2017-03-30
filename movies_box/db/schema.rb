@@ -102,22 +102,10 @@ ActiveRecord::Schema.define(version: 20170303090729) do
 
   add_index "movies", ["format_id"], name: "index_movies_on_format_id"
 
-  create_table "movies_persons", id: false, force: :cascade do |t|
-    t.integer "movie_id",  null: false
-    t.integer "person_id", null: false
-  end
-
-  add_index "movies_persons", ["movie_id"], name: "index_movies_persons_on_movie_id"
-  add_index "movies_persons", ["person_id"], name: "index_movies_persons_on_person_id"
-
   create_table "people", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "persons", force: :cascade do |t|
-    t.string "name"
   end
 
   create_table "subtitles", force: :cascade do |t|

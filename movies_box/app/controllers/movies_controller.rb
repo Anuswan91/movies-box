@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @genres = @movie.genres
     @countries = @movie.countries
+    @languages = @movie.languages
+    @subtitles = @movie.subtitles
   end
 
   def new
@@ -33,6 +35,14 @@ class MoviesController < ApplicationController
 
     array_params[:countries].each do |country|
       MovieCountry.create movie_id: idMovie, country_id: country
+    end
+
+    array_params[:languages].each do |language|
+      MovieLanguage.create movie_id: idMovie, language_id: language
+    end
+
+    array_params[:subtitles].each do |subtitle|
+      MovieSubtitle.create movie_id: idMovie, subtitle_id: subtitle
     end
     # redirect_to "/movies"
   end
@@ -62,6 +72,8 @@ class MoviesController < ApplicationController
 
     def array_params
       params.require(:movie).permit(:genres => [],
-                                    :countries => [])
+                                    :countries => [],
+                                    :languages => [],
+                                    :subtitles => [])
     end
 end

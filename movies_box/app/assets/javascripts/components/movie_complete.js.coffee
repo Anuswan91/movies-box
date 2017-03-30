@@ -3,14 +3,16 @@
     movie: @props.movie
     genres: @props.genres
     countries: @props.countries
+    languages: @props.languages
+    subtitles: @props.subtitles
   render: ->
     React.DOM.div
       className: 'movie-complete'
       React.DOM.div
         className: 'jumbotron text-center'
         React.DOM.img
-          src: '../images/example.jpg'
-          alt: 'Example'
+          src: getPoster(@state.movie.image)
+          alt: @state.movie.title
           # height: '150'
           # width: '150'
         React.DOM.div
@@ -44,6 +46,20 @@
                 className: 'list-group-item'
                 key: country.id
                 "#{ country.name }"
+          React.DOM.ul
+            className: 'list-group'
+            for language in @state.languages
+              React.DOM.li
+                className: 'list-group-item'
+                key: language.id
+                "#{ language.name }"
+          React.DOM.ul
+            className: 'list-group'
+            for subtitle in @state.subtitles
+              React.DOM.li
+                className: 'list-group-item'
+                key: subtitle.id
+                "#{ subtitle.name }"
           React.DOM.p
             className: 'buttons-preview'
             React.DOM.a

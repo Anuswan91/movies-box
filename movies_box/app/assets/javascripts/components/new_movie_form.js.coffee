@@ -11,27 +11,26 @@
     image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjI1MjkzMjczMV5BMl5BanBnXkFtZTgwNDk4NjYyMTI@._V1_SX300.jpg'
     genres: []
     countries: []
+    languages: []
+    subtitles: []
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
   handleChangeGenres: (e) ->
-    genres = @state.genres # TODO make a function which do this step
-    newValue = e.target.value
-    if genres.includes( newValue )
-      genres.splice( genres.indexOf( newValue ), 1 )
-      @setState genres: genres
-    else
-      genres.push( newValue )
-      @setState genres: genres
+    # genres = @state.genres # TODO make a function which do this step
+    # newValue = e.target.value
+    # if genres.includes( newValue )
+    #   genres.splice( genres.indexOf( newValue ), 1 )
+    # else
+    #   genres.push( newValue )
+    # @setState genres: genres
+    @setState genres: setArray(@state.genres, e.target.value)
   handleChangeCountries: (e) ->
-    countries = @state.countries
-    newValue = e.target.value
-    if countries.includes( newValue )
-      countries.splice( countries.indexOf( newValue ), 1 )
-      @setState countries: countries
-    else
-      countries.push( newValue )
-      @setState countries: countries
+    @setState countries: setArray(@state.countries, e.target.value)
+  handleChangeLanguages: (e) ->
+    @setState languages: setArray(@state.languages, e.target.value)
+  handleChangeSubtitles: (e) ->
+    @setState subtitles: setArray(@state.subtitles, e.target.value)
   valid: ->
     @state.title && @state.released && @state.runtime && @state.plot && @state.rating && @state.added && @state.watched && @state.format_id && @state.image
   handleSubmit: (e) ->
@@ -175,6 +174,32 @@
                 ' '
                 React.DOM.span
                   className: 'glyphicon glyphicon-eye-close'
+        React.DOM.div
+          className: 'form-group'
+          React.DOM.select
+            multiple: 'true'
+            className: 'form-control'
+            name: 'languages'
+            value: @state.languages
+            onChange: @handleChangeLanguages
+            for language in @props.languages
+              React.DOM.option
+                key: language.id
+                value: language.id
+                language.name
+        React.DOM.div
+          className: 'form-group'
+          React.DOM.select
+            multiple: 'true'
+            className: 'form-control'
+            name: 'subtitles'
+            value: @state.subtitles
+            onChange: @handleChangeSubtitles
+            for subtitle in @props.subtitles
+              React.DOM.option
+                key: subtitle.id
+                value: subtitle.id
+                subtitle.name
         React.DOM.div
           className: 'form-group'
           React.DOM.select
