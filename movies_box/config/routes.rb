@@ -3,13 +3,19 @@ Rails.application.routes.draw do
   resources :movies
   resources :movies
 
-  root 'movies#home'
-  get 'movies' => 'movies#index'
-  get 'movies/:id' => 'movies#show'
-  get 'movies/new' => 'movies#new'
-  # post 'movies/new' => 'movies#create'
-  get 'help' => 'movies#help'
-  get 'about' => 'movies#about'
+  root 'movies#index'
+
+  # namespace :api do
+  #   namespace :v1 do
+  #     resources :items, only: [:index, :create, :destroy, :update]
+  #   end
+  # end
+
+  # get 'movies' => 'movies#index'
+  # get 'movies/:id' => 'movies#show'
+  # get 'movies/new' => 'movies#new'
+  # get 'help' => 'movies#help'
+  # get 'about' => 'movies#about'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
