@@ -1,19 +1,25 @@
 @Poster = React.createClass
-  getInitialState: ->
-    url: @props.url
+  statics: {
+    imgHeight: 150,
+    imgWidth: 150
+  }
   getPoster:  ->
-    src = 'test'
-    $.ajax
-      method: 'GET'
-      url: @state.url
-      error: () =>
-        src = '../images/example.jpg'
-        @setState url: src
+    # src = 'test'
+    # $.ajax
+    #   method: 'GET'
+    #   url: @state.url
+    #   error: () =>
+    #     @setState url: '../images/example.jpg'
+    return '../images/example.jpg'
+  getInitialState: ->
+    url: @getPoster()#@props.url
+    height: @props.height || Poster.imgHeight
+    width: @props.width || Poster.imgWidth
+
   render: ->
-    @getPoster()
     React.DOM.img
       className: 'img-responsive'
       src: @state.url
       alt: "#{ @props.title }"
-      # height: '150'
-      # width: '150'
+      height: "#{ @state.height }"
+      width: "#{ @state.width }"

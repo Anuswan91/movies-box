@@ -1,6 +1,11 @@
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all
+    @allFormats = Format.all
+    @allGenres = Genre.all
+    @allCountries = Country.all
+    @allLanguages = Language.all
+    @allSubtitles = Subtitle.all
   end
 
   def show

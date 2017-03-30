@@ -6,14 +6,7 @@
         className: 'thumbnail'
         React.DOM.a
           href: '/movies/' + @props.movie.id
-          React.DOM.img
-            className: 'img-responsive'
-            src: 'images/example.jpg'
-            # src: "#{ @props.movie.image }"
-            # src: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTgxMjgyMTcyNF5BMl5BanBnXkFtZTcwMDg1MTU1MQ@@._V1_SX300.jpg'
-            alt: "#{ @props.movie.title }"
-            height: '150'
-            width: '150'
+          React.createElement Poster, title: @props.movie.title, url: @props.movie.image
         React.DOM.div
           className: 'caption'
           React.DOM.h3

@@ -1,4 +1,4 @@
-@NewMovieForm = React.createClass
+@MovieForm = React.createClass
   getInitialState: ->
     title: ''
     released: '1995-11-11'
@@ -35,9 +35,10 @@
     @state.title && @state.released && @state.runtime && @state.plot && @state.rating && @state.added && @state.watched && @state.format_id && @state.image
   handleSubmit: (e) ->
     e.preventDefault()
-    $.post '/movies#create', { movie: @state }, (data) =>
+    $.post '', { movie: @state }, (data) =>
       console.log(@state)
       console.log(data)
+      @props.handleNewMovie data
       @setState @getInitialState()
     , 'JSON'
   render: ->

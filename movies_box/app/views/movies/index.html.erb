@@ -1,1 +1,9 @@
-<%= react_component 'MoviesList', { data: @movies } %>
+<%= react_component 'MoviesList',
+  { data: @movies,
+    allFormats: @allFormats,
+    allGenres: @allGenres,
+    allCountries: @allCountries,
+    allLanguages: @allLanguages,
+    allSubtitles: @allSubtitles
+  }
+%>
