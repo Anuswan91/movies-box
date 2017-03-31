@@ -2,7 +2,22 @@ class MoviesController < ApplicationController
   def index
     movies = Array.new
     Movie.all.each do |movie|
-      movies.push(movie)
+      movie.genres
+      tmp = { id: movie.id,
+              title: movie.title,
+              released: movie.released,
+              runtime: movie.runtime,
+              plot: movie.plot,
+              rating: movie.rating,
+              added: movie.added,
+              watched: movie.watched,
+              format_id: movie.format_id,
+              genres: movie.genres,
+              countries: movie.countries,
+              languages: movie.languages,
+              subtitles: movie.subtitles
+            }
+      movies.push(tmp)
     end
     @movies = movies # Movie.all
     @allFormats = Format.all

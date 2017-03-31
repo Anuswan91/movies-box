@@ -9,10 +9,10 @@
     watched: @props.movie.watched
     format_id: @props.movie.format_id
     image: @props.movie.image
-    genres: @props.movie.genres
-    countries: @props.movie.countries
-    languages: @props.movie.languages
-    subtitles: @props.movie.subtitles
+    genres: @props.genres
+    countries: @props.countries
+    languages: @props.languages
+    subtitles: @props.subtitles
   getDefaultProps: ->
     edit: false
     # movie:{ title: '' }
@@ -61,7 +61,7 @@
         value: value
         onChange: @handleChanges
   formSelect: (name, value, onChange, array, mutliple, typeVal) ->
-    # console.log(name, value)
+    # console.log(name, "#{ mutliple }")
     React.DOM.div
       className: 'form-group'
       React.DOM.select
@@ -83,9 +83,9 @@
         className: 'form-block'
         onSubmit: @handleSubmit
         @formInput('Title', 'title', @state.title, 'text', 'defaultValue')
-        @formSelect('genres', @state.genres, @handleChangeGenres, @props.genres, true, 'defaultValue')
+        @formSelect('genres', @state.genres, @handleChangeGenres, @props.allGenres, true, 'defaultValue')
         @formInput('Released', 'released', @state.released, 'date', 'defaultValue')
-        @formSelect('countries', @state.countries, @handleChangeCountries, @props.countries, true, 'defaultValue')
+        @formSelect('countries', @state.countries, @handleChangeCountries, @props.allCountries, true, 'defaultValue')
         React.DOM.div
           className: 'form-group'
           React.DOM.input
@@ -153,9 +153,21 @@
                 ' '
                 React.DOM.span
                   className: 'glyphicon glyphicon-eye-close'
-        @formSelect('languages', @state.languages, @handleChangeLanguages, @props.languages, true, 'defaultValue')
-        @formSelect('subtitles', @state.subtitles, @handleChangeSubtitles, @props.subtitles, true, 'defaultValue')
-        @formSelect('format_id', @state.format_id, @handleChange, @props.formats, false, 'defaultValue')
+        @formSelect('languages', @state.languages, @handleChangeLanguages, @props.allLanguages, true, 'defaultValue')
+        @formSelect('subtitles', @state.subtitles, @handleChangeSubtitles, @props.allSubtitles, true, 'defaultValue')
+        # @formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, false, 'defaultValue')
+        React.DOM.div
+          className: 'form-group'
+          React.DOM.select
+            className: 'form-control'
+            name: 'format_id'
+            value: @state.format_id
+            onChange: @handleChange
+            for element in @props.allFormats
+              React.DOM.option
+                key: element.id
+                value: element.id
+                element.name
         React.DOM.button
           type: 'submit'
           className: 'btn btn-primary'
@@ -174,9 +186,9 @@
           className: 'form-block'
           onSubmit: @handleSubmit
           @formInput('Title', 'title', @state.title, 'value')
-          @formSelect('genres', @state.genres, @handleChangeGenres, @props.genres, true, 'value')
+          @formSelect('genres', @state.genres, @handleChangeGenres, @props.allGenres, true, 'value')
           @formInput('Released', 'released', @state.released, 'date', 'value')
-          @formSelect('countries', @state.countries, @handleChangeCountries, @props.countries, true, 'value')
+          @formSelect('countries', @state.countries, @handleChangeCountries, @props.allCountries, true, 'value')
           React.DOM.div
             className: 'form-group'
             React.DOM.input
@@ -242,16 +254,16 @@
                   ' '
                   React.DOM.span
                     className: 'glyphicon glyphicon-eye-close'
-          @formSelect('languages', @state.languages, @handleChangeLanguages, @props.languages, true, 'value')
-          @formSelect('subtitles', @state.subtitles, @handleChangeSubtitles, @props.subtitles, true, 'value')
-          @formSelect('format_id', @state.format_id, @handleChange, @props.formats, false, 'value')
+          @formSelect('languages', @state.languages, @handleChangeLanguages, @props.allLanguages, true, 'value')
+          @formSelect('subtitles', @state.subtitles, @handleChangeSubtitles, @props.allSubtitles, true, 'value')
+          @formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, false, 'value')
           React.DOM.button
             type: 'submit'
             className: 'btn btn-primary'
             disabled: !@valid()
             'Submit'
   render: ->
-    console.log(@props.movie)
+    console.log(@props)
     if @props.edit
       @formEdit()
     else

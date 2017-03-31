@@ -66,7 +66,10 @@
   movieEdit: ->
     # @setArray()
     # console.log(@state)
-    React.createElement MovieForm, handleNewMovie: @addMovie, edit: true, movie: @props.movie, formats: @props.allFormats, genres: @props.allGenres, countries: @props.allCountries, languages: @props.allLanguages, subtitles: @props.allSubtitles
+    # id = []
+    # for genre in @props.movie.genres
+    #     id.push(genre.id)
+    React.createElement MovieForm, handleNewMovie: @addMovie, edit: true, movie: @props.movie, genres: getIdInArray(@props.movie.genres), countries: getIdInArray(@props.movie.countries), genres: getIdInArray(@props.movie.genres), languages: getIdInArray(@props.movie.languages), subtitles: getIdInArray(@props.movie.subtitles), allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
     # React.DOM.h1
     #   className: 'title'
     #   'New Movie'

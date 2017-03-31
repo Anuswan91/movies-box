@@ -4,3 +4,8 @@
   else
     array.push( newValue )
   return array
+
+@getIdInArray = (array) ->
+  arryId = []
+  for element in array
+      arryId.push(element.id)
