@@ -1,6 +1,10 @@
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.all
+    movies = Array.new
+    Movie.all.each do |movie|
+      movies.push(movie)
+    end
+    @movies = movies # Movie.all
     @allFormats = Format.all
     @allGenres = Genre.all
     @allCountries = Country.all
@@ -14,6 +18,7 @@ class MoviesController < ApplicationController
     @countries = @movie.countries
     @languages = @movie.languages
     @subtitles = @movie.subtitles
+    # render json: [@genres, @countries, @languages, @subtitles]
   end
 
   def new

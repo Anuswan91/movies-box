@@ -8,6 +8,20 @@
     allSubtitles: []
   getInitialState: ->
     edit: false
+    genres: []
+    countries: []
+    languages: []
+    subtitles: []
+  setArray: ->
+    $.ajax
+      method: 'show'
+      url: ''
+      success: (data) =>
+        console.log(data)
+        # @setState genres: []
+        # countries: []
+        # languages: []
+        # subtitles: []
   handleToggle: (e) ->
     e.preventDefault()
     @setState edit: !@state.edit
@@ -50,6 +64,7 @@
               React.DOM.span
                 className: 'glyphicon glyphicon-pencil'
   movieEdit: ->
+    # @setArray()
     # console.log(@state)
     React.createElement MovieForm, handleNewMovie: @addMovie, edit: true, movie: @props.movie, formats: @props.allFormats, genres: @props.allGenres, countries: @props.allCountries, languages: @props.allLanguages, subtitles: @props.allSubtitles
     # React.DOM.h1
@@ -235,7 +250,6 @@
     #   React.DOM.span
     #     className: 'glyphicon glyphicon-pencil'
   render: ->
-    console.log(@state)
     if @state.edit
       @movieEdit()
     else
