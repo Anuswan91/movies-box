@@ -20,7 +20,7 @@
       React.DOM.h1
         className: 'title movies-list'
         'List Movies'
-      # React.createElement MovieForm, handleNewMovie: @addMovie, formats: @props.allFormats, genres: @props.allGenres, countries: @props.allCountries, languages: @props.allLanguages, subtitles: @props.allSubtitles
+      React.createElement MovieForm, handleNewMovie: @addMovie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
       React.DOM.div
         className: 'row'
         for movie in @state.movies
