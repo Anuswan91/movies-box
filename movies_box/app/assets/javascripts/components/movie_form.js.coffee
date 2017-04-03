@@ -39,6 +39,9 @@
       @props.handleNewMovie data
       @setState @getInitialState()
     , 'JSON'
+  handleClose: (e) ->
+    e.preventDefault()
+    @props.handleToggle e
   formEdit: ->
     typeVal = 'defaultValue'
     React.DOM.h1
@@ -97,11 +100,11 @@
           className: 'btn btn-primary'
           disabled: !@valid()
           'Submit'
-        # React.DOM.button
-        #   type: 'submit'
-        #   className: 'btn btn-warning'
-        #   onClick: @handleToggle
-        #   'Cancel'
+        React.DOM.button
+          type: 'button'
+          className: 'btn btn-warning'
+          onClick: @handleClose
+          'Cancel'
   formNew: ->
     typeVal = 'defaultValue'
     React.DOM.h1

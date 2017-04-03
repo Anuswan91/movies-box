@@ -1,6 +1,6 @@
 @formInput = (placeholder, name, value, onChange, type, typeVal) ->
   React.DOM.div
-    className: 'form-group'
+    className: 'form-inline'
     React.DOM.input
       type: type
       className: 'form-control'
@@ -11,7 +11,7 @@
 
 @formMultiSelect = (name, value, onChange, array, mutliple, typeVal) ->
   React.DOM.div
-    className: 'form-group'
+    className: 'form-inline'
     React.DOM.select
       multiple: "#{ mutliple }"
       className: 'form-control'
@@ -50,7 +50,7 @@
 
 @formInputNumber = (placeholder, name, value, onChange, typeVal, min, step, max) ->
   React.DOM.div
-    className: 'form-group'
+    className: 'form-inline'
     React.DOM.input
       type: 'number'
       min: "#{min}"
