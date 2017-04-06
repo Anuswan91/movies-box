@@ -20,6 +20,10 @@
     countries: []
     languages: []
     subtitles: []
+    allGenres: []
+    allCountries: []
+    allLanguages: []
+    allSubtitles: []
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
@@ -50,51 +54,19 @@
       React.DOM.form
         className: 'form-block'
         onSubmit: @handleSubmit
-        formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal)
-        formMultiSelect('genres', @state.genres, @handleChangeGenres, @props.allGenres, true, typeVal)
-        formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal)
-        formMultiSelect('countries', @state.countries, @handleChangeCountries, @props.allCountries, true, typeVal)
-        formInputNumber('Runtime', 'runtime', @state.runtime, @handleChange, typeVal, 0, 1, 1000)
-        formInput('Poster', 'image', @state.image, @handleChange, 'url', typeVal)
+        formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
+        formMultiSelect('genres', @state.genres, @handleChangeGenres, @props.allGenres, true, typeVal, 'form-group')
+        formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
+        formMultiSelect('countries', @state.countries, @handleChangeCountries, @props.allCountries, true, typeVal, 'form-group')
+        formInputNumber('Runtime', 'runtime', @state.runtime, @handleChange, typeVal, 0, 1, 1000, 'form-group')
+        formInput('Poster', 'image', @state.image, @handleChange, 'url', typeVal, 'form-group')
         formTextArea('Plot', 'plot', @state.plot, @handleChange, typeVal)
-        formInputNumber('Rating', 'rating', @state.rating, @handleChange, typeVal, 0, 0.1, 10)
-        formInput('Added', 'added', @state.added, @handleChange, 'date', typeVal)
-        React.DOM.fieldset
-          className: 'form-group row'
-          React.DOM.legend
-            className: 'col-form-legend col-sm-2'
-            'Watched'
-            React.DOM.div
-              className: 'col-sm-10'
-            React.DOM.div
-              className: 'form-check'
-              React.DOM.label
-                className: 'form-check-label'
-                React.DOM.input
-                  type: 'radio'
-                  className: 'form-check-input'
-                  name: 'watched'
-                  "#{typeVal}": 'true'
-                  onChange: @handleChange
-                ' '
-                React.DOM.span
-                  className: 'glyphicon glyphicon-eye-open'
-            React.DOM.div
-              className: 'form-check'
-              React.DOM.label
-                className: 'form-check-label'
-                React.DOM.input
-                  type: 'radio'
-                  className: 'form-check-input'
-                  name: 'watched'
-                  "#{typeVal}": 'false'
-                  onChange: @handleChange
-                ' '
-                React.DOM.span
-                  className: 'glyphicon glyphicon-eye-close'
-        formMultiSelect('languages', @state.languages, @handleChangeLanguages, @props.allLanguages, true, typeVal)
-        formMultiSelect('subtitles', @state.subtitles, @handleChangeubtitles, @props.allSubtitles, true, typeVal)
-        formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, typeVal)
+        formInputNumber('Rating', 'rating', @state.rating, @handleChange, typeVal, 0, 0.1, 10, 'form-group')
+        formInput('Added', 'added', @state.added, @handleChange, 'date', typeVal, 'form-group')
+        formRadioYesNo('Watched', 'watched', @state.watched, @handleChange, typeVal)
+        formMultiSelect('languages', @state.languages, @handleChangeLanguages, @props.allLanguages, true, typeVal, 'form-group')
+        formMultiSelect('subtitles', @state.subtitles, @handleChangeubtitles, @props.allSubtitles, true, typeVal, 'form-group')
+        formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, typeVal, 'form-group')
         React.DOM.button
           type: 'submit'
           className: 'btn btn-primary'
@@ -111,53 +83,23 @@
       className: 'title'
       'New Movie'
       React.DOM.form
-        className: 'form-block'
+        className: 'form-horizontal'
         onSubmit: @handleSubmit
-        formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal)
-        formMultiSelect('genres', @state.genres, @handleChangeGenres, @props.allGenres, true, typeVal)
-        formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal)
-        formMultiSelect('countries', @state.countries, @handleChangeCountries, @props.allCountries, true, typeVal)
-        formInputNumber('Runtime', 'runtime', @state.runtime, @handleChange, typeVal, 0, 1, 1000)
-        formInput('Poster', 'image', @state.image, @handleChange, 'url', typeVal)
-        formTextArea('Plot', 'plot', @state.plot, @handleChange, typeVal)
-        formInputNumber('Rating', 'rating', @state.rating, @handleChange, typeVal, 0, 0.1, 10)
-        formInput('Added', 'added', @state.added, @handleChange, 'date', typeVal)
-        React.DOM.fieldset
-          className: 'form-group row'
-          React.DOM.legend
-            className: 'col-form-legend col-sm-2'
-            'Watched'
+        formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
+        formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
+        formInput('Added', 'added', @state.added, @handleChange, 'date', typeVal, 'form-group')
+        formRadioYesNo('Watched', 'watched', @state.watched, @handleChange, typeVal)
+        React.DOM.div
+          className: 'form-group'
+          React.DOM.div
+            className: 'col-md-4'
             React.DOM.div
-              className: 'col-sm-10'
-            React.DOM.div
-              className: 'form-check'
-              React.DOM.label
-                className: 'form-check-label'
-                React.DOM.input
-                  type: 'radio'
-                  className: 'form-check-input'
-                  name: 'watched'
-                  "#{typeVal}": 'true'
-                  onChange: @handleChange
-                ' '
-                React.DOM.span
-                  className: 'glyphicon glyphicon-eye-open'
-            React.DOM.div
-              className: 'form-check'
-              React.DOM.label
-                className: 'form-check-label'
-                React.DOM.input
-                  type: 'radio'
-                  className: 'form-check-input'
-                  name: 'watched'
-                  "#{typeVal}": 'false'
-                  onChange: @handleChange
-                ' '
-                React.DOM.span
-                  className: 'glyphicon glyphicon-eye-close'
-        formMultiSelect('languages', @state.languages, @handleChangeLanguages, @props.allLanguages, true, typeVal)
-        formMultiSelect('subtitles', @state.subtitles, @handleChangeubtitles, @props.allSubtitles, true, typeVal)
-        formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, typeVal)
+              className: 'form-group row'
+              formMultiSelect('genres', @state.genres, @handleChangeGenres, @props.allGenres, true, typeVal, 'col-md-4')
+              formMultiSelect('languages', @state.languages, @handleChangeLanguages, @props.allLanguages, true, typeVal, 'col-md-4')
+              formMultiSelect('subtitles', @state.subtitles, @handleChangeubtitles, @props.allSubtitles, true, typeVal, 'col-md-4')
+              formMultiSelect('countries', @state.countries, @handleChangeCountries, @props.allCountries, true, typeVal, 'col-md-4')
+        formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, typeVal, 'form-group')
         React.DOM.button
           type: 'submit'
           className: 'btn btn-primary'

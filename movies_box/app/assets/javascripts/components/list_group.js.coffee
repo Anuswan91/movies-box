@@ -7,5 +7,5 @@
       for element in @state.list
         React.DOM.li
           className: 'list-group-item'
-          key: element.id
+          key: "#{ element.id }"
           "#{ element.name }"

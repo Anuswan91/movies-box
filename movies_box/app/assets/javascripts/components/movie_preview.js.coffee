@@ -12,16 +12,6 @@
     countries: []
     languages: []
     subtitles: []
-  setArray: ->
-    $.ajax
-      method: 'show'
-      url: ''
-      success: (data) =>
-        console.log(data)
-        # @setState genres: []
-        # countries: []
-        # languages: []
-        # subtitles: []
   handleView: (e) ->
     e.preventDefault()
     @setState display: 'view'
@@ -32,22 +22,14 @@
     e.preventDefault()
     @setState display: 'edit'
   movieViewComplete: ->
-      React.DOM.h1
-        className: 'col-sm-6 col-md-4'
-        'Movie COmplete View'
-        # TODO create react element
-        React.DOM.button
-          type: 'button'
-          className: 'btn btn-warning'
-          onClick: @handleView
-          'Cancel'
+    React.createElement MovieComplete, handleToggle: @handleView, movie: @props.movie, genres: @props.movie.genres, countries: @props.movie.countries, languages: @props.movie.languages, subtitles: @props.movie.subtitles
   movieView: ->
     React.DOM.div
       className: 'col-sm-6 col-md-4'
       React.DOM.div
         className: 'thumbnail'
         React.DOM.a
-          href: '/movies/' + @props.movie.id
+          # href: '/movies/' + @props.movie.id
           React.createElement Poster, title: @props.movie.title, url: @props.movie.image
         React.DOM.div
           className: 'caption'

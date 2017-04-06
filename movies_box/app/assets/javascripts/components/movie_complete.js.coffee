@@ -5,6 +5,14 @@
     countries: @props.countries
     languages: @props.languages
     subtitles: @props.subtitles
+  getDefaultProps: ->
+    genres: []
+    countries: []
+    languages: []
+    subtitles: []
+  handleClose: (e) ->
+    e.preventDefault()
+    @props.handleToggle e
   render: ->
     React.DOM.div
       className: 'movie-complete'
@@ -40,3 +48,8 @@
               href: '#'
               React.DOM.span
                 className: 'glyphicon glyphicon-pencil'
+            React.DOM.button
+              type: 'button'
+              className: 'btn btn-warning'
+              onClick: @handleClose
+              'Cancel'

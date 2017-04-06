@@ -10,6 +10,7 @@ class MoviesController < ApplicationController
               plot: movie.plot,
               rating: movie.rating,
               added: movie.added,
+              image: movie.image,
               watched: movie.watched,
               format_id: movie.format_id,
               genres: movie.genres,
