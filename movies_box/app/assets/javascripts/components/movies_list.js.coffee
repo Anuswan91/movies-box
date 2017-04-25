@@ -15,6 +15,10 @@
     index = @state.movies.indexOf movie
     movies = React.addons.update(@state.movies, { $splice: [[index, 1]] })
     @replaceState movies: movies
+  # editMovie: (movie, data) ->
+  #   index = @state.movies.indexOf movie
+  #   movies = React.addons.update(@state.movies, { $splice: [[index, 1, data]] })
+  #   @replaceState movies: movies
   render: ->
     React.DOM.div
       className: 'movies-list'
@@ -25,4 +29,4 @@
       React.DOM.div
         className: 'row'
         for movie in @state.movies
-          React.createElement MoviePreview, key: movie.id, handleDeleteMovie: @deleteMovie, movie: movie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
+          React.createElement MoviePreview, key: movie.id, handleDeleteMovie: @deleteMovie, handleEditMovie: @editMovie, movie: movie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles

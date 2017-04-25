@@ -113,8 +113,12 @@ class MoviesController < ApplicationController
   end
 
   def update
-    # @movie = Record.find(params[:id])
-    # if @movie.update()
+    @movie = Movie.find(params[:id])
+    if @movie.update(movie_params)
+      render json: @movie
+    else
+      render json: @movie.errors, status: :unprocessable_entity
+    end
   end
 
   def home
@@ -127,7 +131,6 @@ class MoviesController < ApplicationController
   end
 
   private
-
     def movie_params
       params.require(:movie).permit(:title,
                                     :released,

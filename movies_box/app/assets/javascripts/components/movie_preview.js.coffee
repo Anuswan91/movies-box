@@ -8,6 +8,7 @@
     allSubtitles: []
   getInitialState: ->
     display: 'view'
+    movie: @props.movie
     genres: []
     countries: []
     languages: []
@@ -29,6 +30,9 @@
       dataType: 'JSON'
       success: () =>
         @props.handleDeleteMovie @props.movie
+  editMovie: (movie, data) ->
+    @replaceState movie: data
+    # @props.handleEditMovie movie, data
   movieViewComplete: ->
     React.createElement MovieComplete, handleToggle: @handleView, movie: @props.movie, genres: @props.movie.genres, countries: @props.movie.countries, languages: @props.movie.languages, subtitles: @props.movie.subtitles
   movieView: ->
@@ -37,25 +41,24 @@
       React.DOM.div
         className: 'thumbnail'
         React.DOM.a
-          # href: '/movies/' + @props.movie.id
-          React.createElement Poster, title: @props.movie.title, url: @props.movie.image
+          React.createElement Poster, title: @state.movie.title, url: @props.movie.image
         React.DOM.div
           className: 'caption'
           React.DOM.h3
             className: 'title movie-preview'
-            @props.movie.title
+            @state.movie.title
           React.DOM.p
             className: 'movie-preview-desc'
-            "Released : #{ @props.movie.released }"
+            "Released : #{ @state.movie.released }"
           React.DOM.p
             className: 'movie-preview-desc'
-            "Runtime : #{ @props.movie.runtime }min"
+            "Runtime : #{ @state.movie.runtime }min"
           React.DOM.p
             className: 'movie-preview-desc'
-            "Rating : #{ @props.movie.rating }"
+            "Rating : #{ @state.movie.rating }"
           React.DOM.p
             className: 'movie-preview-desc'
-            "Watched : #{ @props.movie.watched }"
+            "Watched : #{ @state.movie.watched }"
           React.DOM.p, null
             React.DOM.a
               className: 'btn btn-primary btn-block'
@@ -76,7 +79,7 @@
               React.DOM.span
                 className: 'glyphicon glyphicon-trash'
   movieEdit: ->
-    React.createElement MovieForm, handleToggle: @handleView, handleNewMovie: @addMovie, edit: true, movie: @props.movie, genres: getIdInArray(@props.movie.genres), countries: getIdInArray(@props.movie.countries), genres: getIdInArray(@props.movie.genres), languages: getIdInArray(@props.movie.languages), subtitles: getIdInArray(@props.movie.subtitles), allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
+    React.createElement MovieForm, handleToggle: @handleView, handleEditMovie: @editMovie, edit: true, movie: @props.movie, genres: getIdInArray(@props.movie.genres), countries: getIdInArray(@props.movie.countries), genres: getIdInArray(@props.movie.genres), languages: getIdInArray(@props.movie.languages), subtitles: getIdInArray(@props.movie.subtitles), allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
   render: ->
     if @state.display == 'edit'
       @movieEdit()

@@ -51,6 +51,34 @@
       @props.handleNewMovie data
       @setState @getInitialState()
     , 'JSON'
+  handleEdit: (e) ->
+    e.preventDefault()
+    # data =
+    #   title: @state.title.value
+    #   released: @refs.released.value
+    #   runtime: @refs.runtime.value
+    #   plot: @refs.plot.value
+    #   rating: @refs.rating.value
+    #   added: @refs.added.value
+    #   watched: @refs.watched.value
+    #   format_id: @refs.format_id.value
+    #   image: @refs.image.value
+    $.ajax
+      method: 'PUT'
+      url: "/movies/#{ @props.movie.id }"
+      dataType: 'JSON'
+      data:
+        movie: @state
+      success: (data) =>
+        console.log("film", data)
+        @props.handleEditMovie @props.movie, data
+
+        # console.log('ooo')
+      @handleClose(e)
+      # genres: @props.genres
+      # countries: @props.countries
+      # languages: @props.languages
+      # subtitles: @props.subtitles
   handleClose: (e) ->
     e.preventDefault()
     @props.handleToggle e
