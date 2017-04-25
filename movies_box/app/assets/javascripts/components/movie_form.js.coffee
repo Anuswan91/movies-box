@@ -79,6 +79,7 @@
           type: 'submit'
           className: 'btn btn-primary'
           disabled: !@valid()
+          onClick: @handleEdit
           'Submit'
         React.DOM.button
           type: 'button'

@@ -108,8 +108,13 @@ class MoviesController < ApplicationController
     end
 
     @movie.destroy
-    
+
     head :no_content
+  end
+
+  def update
+    # @movie = Record.find(params[:id])
+    # if @movie.update()
   end
 
   def home
