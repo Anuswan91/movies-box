@@ -9,11 +9,12 @@
     allLanguages: []
     allSubtitles: []
   addMovie: (movie) ->
-    # movies = @state.movies.slice()
-    # movies.push movie
-    # @setState movies: movies
     movies = React.addons.update(@state.movies, { $push: [movie] })
     @setState movies: movies
+  deleteMovie: (movie) ->
+    index = @state.movies.indexOf movie
+    movies = React.addons.update(@state.movies, { $splice: [[index, 1]] })
+    @replaceState movies: movies
   render: ->
     React.DOM.div
       className: 'movies-list'
@@ -24,4 +25,4 @@
       React.DOM.div
         className: 'row'
         for movie in @state.movies
-          React.createElement MoviePreview, key: movie.id, movie: movie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
+          React.createElement MoviePreview, key: movie.id, handleDeleteMovie: @deleteMovie, movie: movie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles

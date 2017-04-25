@@ -18,7 +18,6 @@
       error: () =>
         @setState url: '../images/example.jpg'
   render: ->
-    console.log(@state.height, @state.width)
     React.DOM.img
       className: 'img-responsive'
       src: @state.url

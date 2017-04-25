@@ -55,22 +55,61 @@ class MoviesController < ApplicationController
     end
     idMovie = Movie.last.id # TODO check if we can get @movie.id
 
-    array_params[:genres].each do |genre|
-      MovieGenre.create movie_id: idMovie, genre_id: genre
+    if( !array_params[:genres].nil? )
+      array_params[:genres].each do |genre|
+        MovieGenre.create movie_id: idMovie, genre_id: genre
+      end
     end
 
-    array_params[:countries].each do |country|
-      MovieCountry.create movie_id: idMovie, country_id: country
+    if( !array_params[:countries].nil? )
+      array_params[:countries].each do |country|
+        MovieCountry.create movie_id: idMovie, country_id: country
+      end
     end
 
-    array_params[:languages].each do |language|
-      MovieLanguage.create movie_id: idMovie, language_id: language
+    if( !array_params[:languages].nil? )
+      array_params[:languages].each do |language|
+        MovieLanguage.create movie_id: idMovie, language_id: language
+      end
     end
 
-    array_params[:subtitles].each do |subtitle|
-      MovieSubtitle.create movie_id: idMovie, subtitle_id: subtitle
+    if( !array_params[:subtitles].nil? )
+      array_params[:subtitles].each do |subtitle|
+        MovieSubtitle.create movie_id: idMovie, subtitle_id: subtitle
+      end
     end
-    # redirect_to "/movies"
+  end
+
+  def destroy
+    @movie = Movie.find(params[:id])
+
+    if( !@movie.movie_genres.nil? )
+      @movie.movie_genres.each do |movie_genre|
+        movie_genre.destroy
+      end
+    end
+
+    if( !@movie.movie_subtitles.nil? )
+      @movie.movie_subtitles.each do |movie_subtitle|
+        movie_subtitle.destroy
+      end
+    end
+
+    if( !@movie.movie_languages.nil? )
+      @movie.movie_languages.each do |movie_language|
+        movie_language.destroy
+      end
+    end
+
+    if( !@movie.movie_countries.nil? )
+      @movie.movie_countries.each do |movie_country|
+        movie_country.destroy
+      end
+    end
+
+    @movie.destroy
+    
+    head :no_content
   end
 
   def home

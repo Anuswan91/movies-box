@@ -15,7 +15,7 @@
     subtitles: @props.subtitles
   getDefaultProps: ->
     edit: false
-    movie: {title: '', released: '', runtime: '46', plot: 'sfdsfsd', rating: '3.2', added: '2017-02-28', watched: 'false', format_id: '', image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjI1MjkzMjczMV5BMl5BanBnXkFtZTgwNDk4NjYyMTI@._V1_SX300.jpg'}
+    movie: {title: 'dfg', released: 'dfg', runtime: '46', plot: 'sfdsfsd', rating: '3.2', added: '2017-02-28', watched: 'false', format_id: '2', image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjI1MjkzMjczMV5BMl5BanBnXkFtZTgwNDk4NjYyMTI@._V1_SX300.jpg'}
     genres: []
     countries: []
     languages: []
@@ -36,10 +36,18 @@
   handleChangeSubtitles: (e) ->
     @setState subtitles: setArray(@state.subtitles, e.target.value)
   valid: ->
-    @state.title && @state.released && @state.runtime && @state.plot && @state.rating && @state.added && @state.watched && @state.image # TODO add all field
+    @state.title &&
+    @state.released &&
+    @state.runtime &&
+    @state.plot &&
+    @state.rating &&
+    @state.added &&
+    @state.watched &&
+    @state.image # TODO add all field
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '', { movie: @state }, (data) =>
+      console.log("data")
       @props.handleNewMovie data
       @setState @getInitialState()
     , 'JSON'
@@ -87,6 +95,8 @@
         onSubmit: @handleSubmit
         formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
         formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
+        formInput('Poster', 'image', @state.image, @handleChange, 'url', typeVal, 'form-group')
+        formInputNumber('Runtime', 'runtime', @state.runtime, @handleChange, typeVal, 0, 1, 1000, 'form-group')
         formInput('Added', 'added', @state.added, @handleChange, 'date', typeVal, 'form-group')
         formRadioYesNo('Watched', 'watched', @state.watched, @handleChange, typeVal)
         React.DOM.div
@@ -97,7 +107,7 @@
               className: 'form-group row'
               formMultiSelect('genres', @state.genres, @handleChangeGenres, @props.allGenres, true, typeVal, 'col-md-4')
               formMultiSelect('languages', @state.languages, @handleChangeLanguages, @props.allLanguages, true, typeVal, 'col-md-4')
-              formMultiSelect('subtitles', @state.subtitles, @handleChangeubtitles, @props.allSubtitles, true, typeVal, 'col-md-4')
+              formMultiSelect('subtitles', @state.subtitles, @handleChangeSubtitles, @props.allSubtitles, true, typeVal, 'col-md-4')
               formMultiSelect('countries', @state.countries, @handleChangeCountries, @props.allCountries, true, typeVal, 'col-md-4')
         formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, typeVal, 'form-group')
         React.DOM.button

@@ -21,6 +21,14 @@
   handleEdit: (e) ->
     e.preventDefault()
     @setState display: 'edit'
+  handleDelete: (e) ->
+    e.preventDefault()
+    $.ajax
+      method: 'DELETE'
+      url: "/movies/#{ @props.movie.id }"
+      dataType: 'JSON'
+      success: () =>
+        @props.handleDeleteMovie @props.movie
   movieViewComplete: ->
     React.createElement MovieComplete, handleToggle: @handleView, movie: @props.movie, genres: @props.movie.genres, countries: @props.movie.countries, languages: @props.movie.languages, subtitles: @props.movie.subtitles
   movieView: ->
@@ -61,6 +69,12 @@
               onClick: @handleEdit
               React.DOM.span
                 className: 'glyphicon glyphicon-pencil'
+            React.DOM.a
+              className: 'btn btn-danger btn-block'
+              role: 'button'
+              onClick: @handleDelete
+              React.DOM.span
+                className: 'glyphicon glyphicon-trash'
   movieEdit: ->
     React.createElement MovieForm, handleToggle: @handleView, handleNewMovie: @addMovie, edit: true, movie: @props.movie, genres: getIdInArray(@props.movie.genres), countries: getIdInArray(@props.movie.countries), genres: getIdInArray(@props.movie.genres), languages: getIdInArray(@props.movie.languages), subtitles: getIdInArray(@props.movie.subtitles), allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
   render: ->
