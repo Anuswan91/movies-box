@@ -26,10 +26,9 @@
     for option in e.target.selectedOptions
       options.push(option.value)
     @setState "#{ name }": options
-  # handleClose: (e) ->
-  #   e.preventDefault()
-  #   @props.handleToggle e
-  handleChange: (e) ->
+  handleSearchChange: (e) ->
+    # TODO update all @state
+    console.log(@state)
     e.preventDefault()
     $.ajax
       method: 'GET'
@@ -38,7 +37,7 @@
       data:
         search: @state
       success: (data) =>
-        console.log(data)
+        # console.log(data)
         @props.handleSearch data
   render: ->
     typeVal = 'defaultValue'
@@ -47,8 +46,8 @@
       'Search Movie'
       React.DOM.form
         className: 'form-horizontal'
-        # onSubmit: @handleSubmit
-        onChange: @handleChange
+        onChange: @handleSearchChange
+        onBlur: @handleSearchChange
         formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
         formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
         formInputNumber('Runtime', 'runtime', @state.runtime, @handleChange, typeVal, 0, 1, 1000, 'form-group')
@@ -74,3 +73,7 @@
           className: 'btn btn-warning'
           onClick: @handleClose
           'Cancel'
+        React.DOM.button
+          type: 'reset'
+          className: 'btn btn-danger'
+          'Reset'

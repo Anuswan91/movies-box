@@ -135,7 +135,8 @@ class MoviesController < ApplicationController
 
   def search
     movies = Array.new
-    Movie.take(3).each do |movie|
+    moviesReq = Movie.where("title = ?", search_params[:title])
+    moviesReq.each do |movie|
       movies.push(getMovieComplete(movie))
     end
     render json: movies
@@ -189,7 +190,7 @@ class MoviesController < ApplicationController
     end
 
     def array_params
-      params.require(:search).permit(:title => [],
+      params.require(:movie).permit(:title => [],
                                     :countries => [],
                                     :languages => [],
                                     :subtitles => [])

@@ -15,7 +15,7 @@
     subtitles: @props.subtitles
   getDefaultProps: ->
     edit: false
-    movie: {title: 'dfg', released: 'dfg', runtime: '46', plot: 'sfdsfsd', rating: '3.2', added: '2017-02-28', watched: 'false', format_id: '2', image: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjI1MjkzMjczMV5BMl5BanBnXkFtZTgwNDk4NjYyMTI@._V1_SX300.jpg'}
+    movie: {title: '', released: '', runtime: '', plot: '', rating: '', added: '', watched: '', format_id: '', image: ''}
     genres: []
     countries: []
     languages: []
@@ -34,14 +34,15 @@
       options.push(option.value)
     @setState "#{ name }": options
   valid: ->
-    @state.title &&
-    @state.released &&
-    @state.runtime &&
-    @state.plot &&
-    @state.rating &&
-    @state.added &&
-    @state.watched &&
-    @state.image # TODO add all field
+    # @state.title &&
+    # @state.released &&
+    # @state.runtime &&
+    # @state.plot &&
+    # @state.rating &&
+    # # @state.added &&
+    # @state.watched &&
+    # @state.image # TODO add all field
+    return true
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '', { movie: @state }, (data) =>
@@ -105,6 +106,8 @@
         formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
         formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
         formInput('Poster', 'image', @state.image, @handleChange, 'url', typeVal, 'form-group')
+        formTextArea('Plot', 'plot', @state.plot, @handleChange, typeVal)
+        formInputNumber('Rating', 'rating', @state.rating, @handleChange, typeVal, 0, 0.1, 10, 'form-group')
         formInputNumber('Runtime', 'runtime', @state.runtime, @handleChange, typeVal, 0, 1, 1000, 'form-group')
         formInput('Added', 'added', @state.added, @handleChange, 'date', typeVal, 'form-group')
         formRadioYesNo('Watched', 'watched', @state.watched, @handleChange, typeVal)
