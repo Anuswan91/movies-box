@@ -19,13 +19,16 @@
     index = @state.movies.indexOf movie
     movies = React.addons.update(@state.movies, { $splice: [[index, 1, data]] })
     @replaceState movies: movies
+  filterMovies: (movies) ->
+    @replaceState movies: movies
   render: ->
     React.DOM.div
       className: 'movies-list'
       React.DOM.h1
         className: 'title movies-list'
         'List Movies'
-      React.createElement MovieForm, handleNewMovie: @addMovie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
+      # React.createElement MovieForm, handleNewMovie: @addMovie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
+      React.createElement MovieSearch, handleSearch: @filterMovies, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
       React.DOM.div
         className: 'row'
         for movie in @state.movies

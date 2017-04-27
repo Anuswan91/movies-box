@@ -12,34 +12,6 @@ class MoviesController < ApplicationController
     @allSubtitles = Subtitle.all
   end
 
-  def getMovieComplete(movie)
-    tmp = { id: movie.id,
-            title: movie.title,
-            released: movie.released,
-            runtime: movie.runtime,
-            plot: movie.plot,
-            rating: movie.rating,
-            added: movie.added,
-            image: movie.image,
-            watched: movie.watched,
-            format_id: movie.format_id,
-            genres: movie.genres,
-            countries: movie.countries,
-            languages: movie.languages,
-            subtitles: movie.subtitles
-          }
-    return tmp
-  end
-
-  def show
-    @movie = Movie.find(params[:id])
-    @genres = @movie.genres
-    @countries = @movie.countries
-    @languages = @movie.languages
-    @subtitles = @movie.subtitles
-    # render json: [@genres, @countries, @languages, @subtitles]
-  end
-
   def create
     @movie = Movie.new(movie_params)
     @movie.save
@@ -161,24 +133,34 @@ class MoviesController < ApplicationController
     end
   end
 
-  def home
-  end
-
-  def new
-    # @formats = Format.all
-    # @genres = Genre.all
-    # @countries = Country.all
-    # @languages = Language.all
-    # @subtitles = Subtitle.all
-  end
-
-  def help
-  end
-
-  def about
+  def search
+    movies = Array.new
+    Movie.take(3).each do |movie|
+      movies.push(getMovieComplete(movie))
+    end
+    render json: movies
   end
 
   private
+    def getMovieComplete(movie)
+      tmp = { id: movie.id,
+              title: movie.title,
+              released: movie.released,
+              runtime: movie.runtime,
+              plot: movie.plot,
+              rating: movie.rating,
+              added: movie.added,
+              image: movie.image,
+              watched: movie.watched,
+              format_id: movie.format_id,
+              genres: movie.genres,
+              countries: movie.countries,
+              languages: movie.languages,
+              subtitles: movie.subtitles
+            }
+      return tmp
+    end
+
     def movie_params
       params.require(:movie).permit(:title,
                                     :released,
@@ -191,8 +173,23 @@ class MoviesController < ApplicationController
                                     :image)
     end
 
+    def search_params
+      params.require(:search).permit(:title,
+                                    :released,
+                                    :runtime,
+                                    :rating,
+                                    :added,
+                                    :watched,
+                                    :format_id,
+                                    :image,
+                                    :genres => [],
+                                    :countries => [],
+                                    :languages => [],
+                                    :subtitles => [])
+    end
+
     def array_params
-      params.require(:movie).permit(:genres => [],
+      params.require(:search).permit(:title => [],
                                     :countries => [],
                                     :languages => [],
                                     :subtitles => [])
