@@ -31,9 +31,7 @@
       success: () =>
         @props.handleDeleteMovie @props.movie
   editMovie: (movie, data) ->
-    # @replaceState movie: data
-    # console.log(movie, data)
-    @props.handleEditMovie movie, data
+    @replaceState movie: data
   movieViewComplete: ->
     React.createElement MovieComplete, handleToggle: @handleView, movie: @state.movie, genres: @state.movie.genres, countries: @state.movie.countries, languages: @state.movie.languages, subtitles: @state.movie.subtitles
   movieView: ->

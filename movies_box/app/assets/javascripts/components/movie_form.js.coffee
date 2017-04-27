@@ -33,17 +33,6 @@
     for option in e.target.selectedOptions
       options.push(option.value)
     @setState "#{ name }": options
-  handleChangeGenres: (e) ->
-    options = []
-    for option in e.target.selectedOptions
-      options.push(option.value)
-    @setState genres: options # TODO same for others + possible d'externaliser
-  # handleChangeCountries: (e) ->
-  #   @setState countries: setArray(@state.countries, e.target.value)
-  # handleChangeLanguages: (e) ->
-  #   @setState languages: setArray(@state.languages, e.target.value)
-  # handleChangeSubtitles: (e) ->
-  #   @setState subtitles: setArray(@state.subtitles, e.target.value)
   valid: ->
     @state.title &&
     @state.released &&
@@ -70,9 +59,7 @@
         movie: @state
       success: (data) =>
         console.log(data)
-        @props.handleEditMovie @props.movie, data, data.genres
-
-        # console.log('ooo')
+        @props.handleEditMovie @state.movie, data, data.genres
       @handleClose(e)
       # genres: @props.genres
       # countries: @props.countries

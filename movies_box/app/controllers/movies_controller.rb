@@ -43,11 +43,9 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     @movie.save
-    # idMovie = Movie.last.id # TODO check if we can get @movie.id
-    cpt=0
+
     if( !array_params[:genres].nil? )
       array_params[:genres].each do |genre|
-        cpt = @movie.id
         MovieGenre.create movie_id: @movie.id, genre_id: genre.to_i
       end
     end
@@ -69,6 +67,7 @@ class MoviesController < ApplicationController
         MovieSubtitle.create movie_id: @movie.id, subtitle_id: subtitle
       end
     end
+
     render json: getMovieComplete(@movie)
   end
 
@@ -156,22 +155,7 @@ class MoviesController < ApplicationController
     end
 
     if @movie.update(movie_params)
-      tmp = { id: @movie.id,
-              title: movie_params[:title],
-              released: @movie.released,
-              runtime: @movie.runtime,
-              plot: @movie.plot,
-              rating: @movie.rating,
-              added: @movie.added,
-              image: @movie.image,
-              watched: @movie.watched,
-              format_id: @movie.format_id,
-              genres: @movie.genres,
-              countries: @movie.countries,
-              languages: @movie.languages,
-              subtitles: @movie.subtitles
-            }
-      render json: tmp
+      render json: getMovieComplete(@movie)
     else
       render json: @movie.errors, status: :unprocessable_entity
     end

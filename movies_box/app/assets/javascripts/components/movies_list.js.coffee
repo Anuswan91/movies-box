@@ -9,7 +9,6 @@
     allLanguages: []
     allSubtitles: []
   addMovie: (movie) ->
-    # movie.genres = setArray(movie.genres)
     movies = React.addons.update(@state.movies, { $push: [movie] })
     @setState movies: movies
   deleteMovie: (movie) ->
@@ -17,11 +16,11 @@
     movies = React.addons.update(@state.movies, { $splice: [[index, 1]] })
     @replaceState movies: movies
   editMovie: (movie, data) ->
+    # console.log(movie, data)
     index = @state.movies.indexOf movie
     movies = React.addons.update(@state.movies, { $splice: [[index, 1, data]] })
     @replaceState movies: movies
   render: ->
-    console.log(@state.movies)
     React.DOM.div
       className: 'movies-list'
       React.DOM.h1
