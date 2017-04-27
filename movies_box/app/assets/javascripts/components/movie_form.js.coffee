@@ -45,7 +45,6 @@
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '', { movie: @state }, (data) =>
-      console.log(data)
       @props.handleNewMovie data
       @setState @getInitialState()
     , 'JSON'
@@ -58,13 +57,8 @@
       data:
         movie: @state
       success: (data) =>
-        console.log(data)
         @props.handleEditMovie @state.movie, data, data.genres
       @handleClose(e)
-      # genres: @props.genres
-      # countries: @props.countries
-      # languages: @props.languages
-      # subtitles: @props.subtitles
   handleClose: (e) ->
     e.preventDefault()
     @props.handleToggle e

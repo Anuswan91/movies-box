@@ -21,6 +21,7 @@
         # React.createElement Poster, title: @state.movie.title, url: @state.movie.image, height: 300, width: 300
         React.DOM.div
           className: 'description'
+          React.createElement Poster, title: @state.movie.title, url: @props.movie.image, height: 300, width: 300
           React.DOM.h3
             className: 'title movie-preview'
             @props.movie.title

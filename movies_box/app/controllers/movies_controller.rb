@@ -165,11 +165,11 @@ class MoviesController < ApplicationController
   end
 
   def new
-    @formats = Format.all
-    @genres = Genre.all
-    @countries = Country.all
-    @languages = Language.all
-    @subtitles = Subtitle.all
+    # @formats = Format.all
+    # @genres = Genre.all
+    # @countries = Country.all
+    # @languages = Language.all
+    # @subtitles = Subtitle.all
   end
 
   def help

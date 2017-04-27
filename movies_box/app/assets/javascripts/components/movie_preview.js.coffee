@@ -1,6 +1,5 @@
 @MoviePreview = React.createClass
   getDefaultProps: ->
-    # movies: []
     allFormats: []
     allGenres: []
     allCountries: []
