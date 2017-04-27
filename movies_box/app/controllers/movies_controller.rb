@@ -2,23 +2,7 @@ class MoviesController < ApplicationController
   def index
     movies = Array.new
     Movie.all.each do |movie|
-      movie.genres
-      tmp = { id: movie.id,
-              title: movie.title,
-              released: movie.released,
-              runtime: movie.runtime,
-              plot: movie.plot,
-              rating: movie.rating,
-              added: movie.added,
-              image: movie.image,
-              watched: movie.watched,
-              format_id: movie.format_id,
-              genres: movie.genres,
-              countries: movie.countries,
-              languages: movie.languages,
-              subtitles: movie.subtitles
-            }
-      movies.push(tmp)
+      movies.push(getMovieComplete(movie))
     end
     @movies = movies # Movie.all
     @allFormats = Format.all
@@ -26,6 +10,25 @@ class MoviesController < ApplicationController
     @allCountries = Country.all
     @allLanguages = Language.all
     @allSubtitles = Subtitle.all
+  end
+
+  def getMovieComplete(movie)
+    tmp = { id: movie.id,
+            title: movie.title,
+            released: movie.released,
+            runtime: movie.runtime,
+            plot: movie.plot,
+            rating: movie.rating,
+            added: movie.added,
+            image: movie.image,
+            watched: movie.watched,
+            format_id: movie.format_id,
+            genres: movie.genres,
+            countries: movie.countries,
+            languages: movie.languages,
+            subtitles: movie.subtitles
+          }
+    return tmp
   end
 
   def show
@@ -37,47 +40,36 @@ class MoviesController < ApplicationController
     # render json: [@genres, @countries, @languages, @subtitles]
   end
 
-  def new
-    @formats = Format.all
-    @genres = Genre.all
-    @countries = Country.all
-    @languages = Language.all
-    @subtitles = Subtitle.all
-  end
-
   def create
     @movie = Movie.new(movie_params)
-
-    if @movie.save
-      render json: @movie
-    else
-      render json: @movie.errors, status: :unprocessable_entity
-    end
-    idMovie = Movie.last.id # TODO check if we can get @movie.id
-
+    @movie.save
+    # idMovie = Movie.last.id # TODO check if we can get @movie.id
+    cpt=0
     if( !array_params[:genres].nil? )
       array_params[:genres].each do |genre|
-        MovieGenre.create movie_id: idMovie, genre_id: genre
+        cpt = @movie.id
+        MovieGenre.create movie_id: @movie.id, genre_id: genre.to_i
       end
     end
 
     if( !array_params[:countries].nil? )
       array_params[:countries].each do |country|
-        MovieCountry.create movie_id: idMovie, country_id: country
+        MovieCountry.create movie_id: @movie.id, country_id: country
       end
     end
 
     if( !array_params[:languages].nil? )
       array_params[:languages].each do |language|
-        MovieLanguage.create movie_id: idMovie, language_id: language
+        MovieLanguage.create movie_id: @movie.id, language_id: language
       end
     end
 
     if( !array_params[:subtitles].nil? )
       array_params[:subtitles].each do |subtitle|
-        MovieSubtitle.create movie_id: idMovie, subtitle_id: subtitle
+        MovieSubtitle.create movie_id: @movie.id, subtitle_id: subtitle
       end
     end
+    render json: getMovieComplete(@movie)
   end
 
   def destroy
@@ -114,14 +106,86 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(params[:id])
+
+    if( !@movie.movie_genres.nil? )
+      @movie.movie_genres.each do |movie_genre|
+        movie_genre.destroy
+      end
+    end
+
+    if( !@movie.movie_subtitles.nil? )
+      @movie.movie_subtitles.each do |movie_subtitle|
+        movie_subtitle.destroy
+      end
+    end
+
+    if( !@movie.movie_languages.nil? )
+      @movie.movie_languages.each do |movie_language|
+        movie_language.destroy
+      end
+    end
+
+    if( !@movie.movie_countries.nil? )
+      @movie.movie_countries.each do |movie_country|
+        movie_country.destroy
+      end
+    end
+
+    if( !array_params[:genres].nil? )
+      array_params[:genres].each do |genre|
+        MovieGenre.create movie_id: params[:id], genre_id: genre
+      end
+    end
+
+    if( !array_params[:countries].nil? )
+      array_params[:countries].each do |country|
+        MovieCountry.create movie_id: params[:id], country_id: country
+      end
+    end
+
+    if( !array_params[:languages].nil? )
+      array_params[:languages].each do |language|
+        MovieLanguage.create movie_id: params[:id], language_id: language
+      end
+    end
+
+    if( !array_params[:subtitles].nil? )
+      array_params[:subtitles].each do |subtitle|
+        MovieSubtitle.create movie_id: params[:id], subtitle_id: subtitle
+      end
+    end
+
     if @movie.update(movie_params)
-      render json: @movie
+      tmp = { id: @movie.id,
+              title: movie_params[:title],
+              released: @movie.released,
+              runtime: @movie.runtime,
+              plot: @movie.plot,
+              rating: @movie.rating,
+              added: @movie.added,
+              image: @movie.image,
+              watched: @movie.watched,
+              format_id: @movie.format_id,
+              genres: @movie.genres,
+              countries: @movie.countries,
+              languages: @movie.languages,
+              subtitles: @movie.subtitles
+            }
+      render json: tmp
     else
       render json: @movie.errors, status: :unprocessable_entity
     end
   end
 
   def home
+  end
+
+  def new
+    @formats = Format.all
+    @genres = Genre.all
+    @countries = Country.all
+    @languages = Language.all
+    @subtitles = Subtitle.all
   end
 
   def help
