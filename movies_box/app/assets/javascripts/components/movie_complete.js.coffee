@@ -17,8 +17,8 @@
     React.DOM.div
       className: 'movie-complete'
       React.DOM.div
-        className: 'jumbotron text-center'
-        # React.createElement Poster, title: @state.movie.title, url: @state.movie.image, height: 300, width: 300
+        # className: 'jumbotron text-center'
+        className: 'well well-lg'
         React.DOM.div
           className: 'description'
           React.createElement Poster, title: @state.movie.title, url: @props.movie.image, height: 300, width: 300

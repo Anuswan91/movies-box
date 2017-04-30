@@ -65,9 +65,11 @@
     @props.handleToggle e
   formEdit: ->
     typeVal = 'defaultValue'
-    React.DOM.h1
-      className: 'title'
-      'Edit'
+    React.DOM.div
+      className: 'well well-lg'
+      React.DOM.h1
+        className: 'title'
+        'Edit'
       React.DOM.form
         className: 'form-block'
         onSubmit: @handleSubmit # TODO enlever
@@ -97,9 +99,11 @@
           'Cancel'
   formNew: ->
     typeVal = 'defaultValue'
-    React.DOM.h1
-      className: 'title'
-      'New Movie'
+    React.DOM.div
+      className: 'well well-lg'
+      React.DOM.h1
+        className: 'title'
+        'New Movie'
       React.DOM.form
         className: 'form-horizontal'
         onSubmit: @handleSubmit

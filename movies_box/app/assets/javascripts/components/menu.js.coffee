@@ -4,6 +4,7 @@
       className: 'menu'
       React.DOM.nav
         className: 'navbar navbar-default'
+        # className: 'navbar-fixed-top'
         React.DOM.div
           className: 'container-fluid'
           React.DOM.div

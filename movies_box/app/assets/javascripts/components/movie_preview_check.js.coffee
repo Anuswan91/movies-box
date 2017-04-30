@@ -3,8 +3,9 @@
     title: ''
     poster: ''
     imdbID: ''
+  handleAddMovie: (e) ->
+    @props.handleAddMovie @props.movie.imdbID
   render: ->
-    console.log(@props.movie)
     React.DOM.div
       className: 'col-sm-6 col-md-4'
       React.DOM.div
@@ -16,3 +17,9 @@
           React.DOM.h3
             className: 'title movie-preview'
             @props.movie.Title
+        React.DOM.a
+          className: 'btn btn-default'
+          role: 'button'
+          onClick: @handleAddMovie
+          React.DOM.span
+            className: 'glyphicon glyphicon-plus'

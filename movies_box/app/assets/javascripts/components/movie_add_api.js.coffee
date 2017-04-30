@@ -16,18 +16,27 @@
       success: (data) =>
         console.log(data)
         array = data.Search
-        # TODO modifer chaque movie pour aller dans le bon format
         @replaceState movies: array
       error: =>
         # console.log("not found")
+  handleAddMovie: (imdbID) ->
+    # console.log(data)
+    $.get
+      url: "http://www.omdbapi.com/?i="+imdbID
+      success: (data) =>
+        console.log(data)
+      error: =>
+        console.log("not found")
+    console.log(imdbID)
   render: ->
     typeVal = 'defaultValue'
-    React.DOM.h1
-      className: 'title'
-      'Check Movie'
+    React.DOM.div
+      className: 'well well-lg'
+      React.DOM.h2
+        className: 'title'
+        'Check Movie'
       React.DOM.form
-        className: 'form-horizontal'
-        # onChange: @handleSearchChange
+        className: 'form-inline'
         onSubmit: @handleSearchChange
         formInput('Title', 'searchName', @state.searchName, @handleChange, 'text', typeVal, 'form-group')
         React.DOM.button
@@ -35,9 +44,9 @@
           className: 'btn btn-primary'
           onClick: @handleCheck
           'Check'
-      React.DOM.div
-        className: 'movies-list-check'
         React.DOM.div
-          className: 'row'
-          for movie in @state.movies
-            React.createElement MoviePreviewCheck, key: movie.imdbID, movie: movie
+          className: 'movies-list-check'
+          React.DOM.div
+            className: 'row'
+            for movie in @state.movies
+              React.createElement MoviePreviewCheck, key: movie.imdbID, handleAddMovie: @handleAddMovie, movie: movie
