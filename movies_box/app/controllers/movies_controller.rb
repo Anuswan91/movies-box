@@ -135,8 +135,7 @@ class MoviesController < ApplicationController
 
   def search
     movies = Array.new
-    moviesReq = Movie.where("title = ?", search_params[:title])
-    moviesReq.each do |movie|
+    Movie.search(search_params).each do |movie|
       movies.push(getMovieComplete(movie))
     end
     render json: movies

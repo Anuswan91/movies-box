@@ -20,15 +20,17 @@
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
+    # @handleSearchChange()
   handleChangeArray: (e) ->
     name = e.target.name
     options = []
     for option in e.target.selectedOptions
       options.push(option.value)
     @setState "#{ name }": options
+    # @handleSearchChange
   handleSearchChange: (e) ->
     # TODO update all @state
-    console.log(@state)
+    # console.log(@state)
     e.preventDefault()
     $.ajax
       method: 'GET'
@@ -46,8 +48,8 @@
       'Search Movie'
       React.DOM.form
         className: 'form-horizontal'
-        onChange: @handleSearchChange
-        onBlur: @handleSearchChange
+        # onChange: @handleSearchChange
+        onSubmit: @handleSearchChange
         formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
         formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
         formInputNumber('Runtime', 'runtime', @state.runtime, @handleChange, typeVal, 0, 1, 1000, 'form-group')
@@ -67,6 +69,7 @@
         React.DOM.button
           type: 'submit'
           className: 'btn btn-primary'
+          onClick: @handleSearchChange
           'Search'
         React.DOM.button
           type: 'button'

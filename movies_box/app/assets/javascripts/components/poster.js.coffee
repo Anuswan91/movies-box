@@ -11,12 +11,14 @@
     @getPoster()
   getPoster:  ->
     if @state.url == null
-      @setState url: '../images/example.jpg'
+      # @setState url: '../images/example.jpg'
+      @setState url: '../images/posternotfound.png'
     $.ajax
       method: 'GET'
       url: @state.url
       error: () =>
-        @setState url: '../images/example.jpg'
+        # @setState url: '../images/example.jpg'
+        @setState url: '../images/posternotfound.png'
   render: ->
     React.DOM.img
       className: 'img-responsive'

@@ -19,4 +19,18 @@ class Movie < ActiveRecord::Base
   validates :title, presence: {
     message: "Title must be informed."
   }
+
+  def self.search(search)
+    moviesReq = Movie.where("title LIKE ?", "%#{search[:title]}%")
+
+    if search[:runtime] != ''
+      moviesReq = moviesReq.where("runtime = ?", "#{search[:runtime]}")
+    end
+
+    if search[:watched] != ''
+      moviesReq = moviesReq.where("watched = ?", search[:watched].to_s == 'true' ? true : false)
+    end
+
+    return moviesReq
+  end
 end

@@ -70,7 +70,7 @@
       'Edit'
       React.DOM.form
         className: 'form-block'
-        onSubmit: @handleSubmit
+        onSubmit: @handleSubmit # TODO enlever
         formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
         formMultiSelect('genres', @state.genres, @handleChangeArray, @props.allGenres, true, typeVal, 'form-group')
         formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
