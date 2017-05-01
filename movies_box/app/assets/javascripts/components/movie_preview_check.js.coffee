@@ -3,6 +3,7 @@
     title: ''
     poster: ''
     imdbID: ''
+    year: ''
   handleAddMovie: (e) ->
     @props.handleAddMovie @props.movie.imdbID
   render: ->
@@ -17,9 +18,11 @@
           React.DOM.h3
             className: 'title movie-preview'
             @props.movie.Title
-        React.DOM.a
-          className: 'btn btn-default'
-          role: 'button'
-          onClick: @handleAddMovie
-          React.DOM.span
-            className: 'glyphicon glyphicon-plus'
+            React.DOM.small null, ' '+@props.movie.Year
+        React.DOM.p null
+          React.DOM.a
+            className: 'btn btn-default'
+            role: 'button'
+            onClick: @handleAddMovie
+            React.DOM.span
+              className: 'glyphicon glyphicon-plus'

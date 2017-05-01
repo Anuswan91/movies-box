@@ -38,41 +38,46 @@
       className: 'col-sm-6 col-md-4'
       React.DOM.div
         className: 'thumbnail'
-        React.DOM.a
-          React.createElement Poster, title: @state.movie.title, url: @props.movie.image
+        React.createElement Poster, title: @state.movie.title, url: @props.movie.image
         React.DOM.div
           className: 'caption'
           React.DOM.h3
             className: 'title movie-preview'
             @state.movie.title
-          React.DOM.p
+          React.DOM.small
             className: 'movie-preview-desc'
             "Released : #{ @state.movie.released }"
-          React.DOM.p
+          React.DOM.br null
+          React.DOM.small
             className: 'movie-preview-desc'
             "Runtime : #{ @state.movie.runtime }min"
-          React.DOM.p
+          React.DOM.br null
+          React.DOM.small
             className: 'movie-preview-desc'
             "Rating : #{ @state.movie.rating }"
-          React.DOM.p
+          React.DOM.br null
+          React.DOM.small
             className: 'movie-preview-desc'
             "Watched : #{ @state.movie.watched }"
-          React.DOM.p, null
-            React.DOM.a
-              className: 'btn btn-primary btn-block'
-              role: 'button'
+          React.DOM.br null
+          React.DOM.div
+            className: 'btn-group'
+            role: 'group'
+            React.DOM.button
+              type: 'button'
+              className: 'btn btn-warning'
               onClick: @handleCompleteView
               React.DOM.span
                 className: 'glyphicon glyphicon-eye-open'
-            React.DOM.a
-              className: 'btn btn-default btn-block'
-              role: 'button'
+            React.DOM.button
+              type: 'button'
+              className: 'btn btn-default'
               onClick: @handleEdit
               React.DOM.span
                 className: 'glyphicon glyphicon-pencil'
-            React.DOM.a
-              className: 'btn btn-danger btn-block'
-              role: 'button'
+            React.DOM.button
+              type: 'button'
+              className: 'btn btn-danger'
               onClick: @handleDelete
               React.DOM.span
                 className: 'glyphicon glyphicon-trash'

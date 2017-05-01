@@ -105,7 +105,7 @@
         className: 'title'
         'New Movie'
       React.DOM.form
-        className: 'form-horizontal'
+        className: 'form-group'
         onSubmit: @handleSubmit
         formInput('Title', 'title', @state.title, @handleChange, 'text', typeVal, 'form-group')
         formInput('Released', 'released', @state.released, @handleChange, 'date', typeVal, 'form-group')
@@ -121,10 +121,10 @@
             className: 'col-md-4'
             React.DOM.div
               className: 'form-group row'
-              formMultiSelect('genres', @state.genres, @handleChangeArray, @props.allGenres, true, typeVal, 'col-md-4')
-              formMultiSelect('languages', @state.languages, @handleChangeArray, @props.allLanguages, true, typeVal, 'col-md-4')
-              formMultiSelect('subtitles', @state.subtitles, @handleChangeArray, @props.allSubtitles, true, typeVal, 'col-md-4')
-              formMultiSelect('countries', @state.countries, @handleChangeArray, @props.allCountries, true, typeVal, 'col-md-4')
+              formMultiSelect('genres', @state.genres, @handleChangeArray, @props.allGenres, true, typeVal, 'form-group')
+              formMultiSelect('languages', @state.languages, @handleChangeArray, @props.allLanguages, true, typeVal, 'form-group')
+              formMultiSelect('subtitles', @state.subtitles, @handleChangeArray, @props.allSubtitles, true, typeVal, 'form-group')
+              formMultiSelect('countries', @state.countries, @handleChangeArray, @props.allCountries, true, typeVal, 'form-group')
         formSelect('format_id', @state.format_id, @handleChange, @props.allFormats, typeVal, 'form-group')
         React.DOM.button
           type: 'submit'

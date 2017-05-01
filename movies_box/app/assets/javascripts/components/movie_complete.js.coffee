@@ -17,8 +17,7 @@
     React.DOM.div
       className: 'movie-complete'
       React.DOM.div
-        # className: 'jumbotron text-center'
-        className: 'well well-lg'
+        className: 'well well-lg text-center'
         React.DOM.div
           className: 'description'
           React.createElement Poster, title: @state.movie.title, url: @props.movie.image, height: 300, width: 300
@@ -41,14 +40,7 @@
           React.createElement ListGroup, list: @state.countries
           React.createElement ListGroup, list: @state.languages
           React.createElement ListGroup, list: @state.subtitles
-          React.DOM.p
-            className: 'buttons-preview'
-            React.DOM.a
-              className: 'btn btn-default'
-              role: 'button'
-              href: '#'
-              React.DOM.span
-                className: 'glyphicon glyphicon-pencil'
+          React.DOM.p null
             React.DOM.button
               type: 'button'
               className: 'btn btn-warning'
