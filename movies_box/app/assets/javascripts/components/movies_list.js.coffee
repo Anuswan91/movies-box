@@ -12,24 +12,26 @@
   addMovie: (movie) ->
     movies = React.addons.update(@state.movies, { $push: [movie] })
     @setState movies: movies
-    @replaceState notification: 'add'
+    @setState notification: 'add'
   deleteMovie: (movie) ->
     index = @state.movies.indexOf movie
     movies = React.addons.update(@state.movies, { $splice: [[index, 1]] })
     @replaceState movies: movies
-    @replaceState notification: 'delete'
+    @setState notification: 'delete'
   editMovie: (movie, data) ->
-    index = @state.movies.indexOf movie
-    movies = React.addons.update(@state.movies, { $splice: [[index, 1, data]] })
-    @replaceState movies: movies
-    @replaceState notification: 'edit'
+    # index = @state.movies.indexOf movie
+    # movies = React.addons.update(@state.movies, { $splice: [[index, 1, data]] })
+    # @replaceState movies: movies
+    # @setState notification: 'edit'
   filterMovies: (movies) ->
     @replaceState movies: movies
+  renderNotification: ->
+    if @state.notification != '' && @state.notification != undefined
+      React.createElement Notification, type: @state.notification
   render: ->
-    console.log('notification', @state.notification)
     React.DOM.div
       className: 'movies-list'
-      React.createElement Notification, type: @state.notification
+      @renderNotification()
       React.createElement MovieForm, handleNewMovie: @addMovie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
       React.createElement MovieSearch, handleSearch: @filterMovies, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
       React.createElement MovieAddAPI, handleNewMovie: @addMovie

@@ -1,6 +1,9 @@
 @Notification = React.createClass
   getInitialState: ->
     time: 5
+    type: @props.type
+  getDefaultProps: ->
+    type: ''
   componentDidMount: ->
     @timerID = setInterval(
       () => @tick(),
@@ -8,6 +11,9 @@
     );
   componentWillUnmount: ->
     clearInterval(@timerID)
+    @setState @getInitialState()
+  componentWillReceiveProps: (nextProps) ->
+    @setState  @getInitialState()
   tick: ->
     time = @state.time
     if time != 0
@@ -33,11 +39,12 @@
       'The movie has been successfully deleted.'
   renderNotification: ->
     # TODO switch case
-    if @props.type == 'add'
+    # console.log("works")
+    if @state.type == 'add'
       @renderAdd()
-    else if @props.type == 'edit'
+    else if @state.type == 'edit'
       @renderEdit()
-    else if @props.type == 'delete'
+    else if @state.type == 'delete'
       @renderDelete()
     else
       null
@@ -51,7 +58,7 @@
     #   default
     #     null
   render: ->
-    # console.log('type', @props.type)
+    console.log('time', @state.time)
     if @state.time
       @renderNotification()
     else
