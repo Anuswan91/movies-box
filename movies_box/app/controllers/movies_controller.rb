@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
 
     if( !array_params[:genres].nil? )
       array_params[:genres].each do |genre|
-        MovieGenre.create movie_id: @movie.id, genre_id: genre.to_i
+        MovieGenre.create movie_id: @movie.id, genre_id: genre
       end
     end
 

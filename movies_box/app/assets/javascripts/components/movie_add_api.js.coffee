@@ -9,9 +9,8 @@
   handleCheck: (e) ->
     e.preventDefault()
     $.get
-      url: "http://www.omdbapi.com/?s="+@state.searchName+"&type=movie&r=json"
+      url: "http://www.omdbapi.com/?s="+convertStringToUrl(@state.searchName)+"&type=movie&r=json"
       success: (data) =>
-        console.log(data)
         array = data.Search
         @replaceState movies: array
       error: =>
@@ -20,7 +19,7 @@
     $.get
       url: "http://www.omdbapi.com/?i="+imdbID
       success: (data) =>
-        @setState movie: convertDataFromAPI(data)
+        @setState movie: convertDataFromAPI(data, @props.allGenres)
         @addMovie()
       error: =>
         console.log("not found")

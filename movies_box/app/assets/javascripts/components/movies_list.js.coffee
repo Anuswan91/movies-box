@@ -32,7 +32,7 @@
       @renderNotification()
       React.createElement MovieForm, handleNewMovie: @addMovie, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
       React.createElement MovieSearch, handleSearch: @filterMovies, allFormats: @props.allFormats, allGenres: @props.allGenres, allCountries: @props.allCountries, allLanguages: @props.allLanguages, allSubtitles: @props.allSubtitles
-      React.createElement MovieAddAPI, handleNewMovie: @addMovie
+      React.createElement MovieAddAPI, handleNewMovie: @addMovie, allGenres: @props.allGenres
       React.DOM.div
         className: 'jumbotron'
         React.DOM.div
