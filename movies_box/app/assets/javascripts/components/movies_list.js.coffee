@@ -18,11 +18,9 @@
     movies = React.addons.update(@state.movies, { $splice: [[index, 1]] })
     @replaceState movies: movies
     @setState notification: 'delete'
-  editMovie: (movie, data) ->
-    # index = @state.movies.indexOf movie
-    # movies = React.addons.update(@state.movies, { $splice: [[index, 1, data]] })
-    # @replaceState movies: movies
-    # @setState notification: 'edit'
+  editMovie: ->
+    console.log('edit')
+    @setState notification: 'edit'
   filterMovies: (movies) ->
     @replaceState movies: movies
   renderNotification: ->

@@ -1,6 +1,6 @@
 @Notification = React.createClass
   getInitialState: ->
-    time: 5
+    time: 3
     type: @props.type
   getDefaultProps: ->
     type: ''
@@ -33,13 +33,12 @@
       'The movie has been successfully edited.'
   renderDelete: ->
     React.DOM.div
-      className: 'alert alert-warning navbar-fixed-top'
+      className: 'alert alert-danger navbar-fixed-top'
       role: 'alert'
       React.DOM.strong null, 'Movie deleted! '
       'The movie has been successfully deleted.'
   renderNotification: ->
     # TODO switch case
-    # console.log("works")
     if @state.type == 'add'
       @renderAdd()
     else if @state.type == 'edit'
@@ -58,7 +57,6 @@
     #   default
     #     null
   render: ->
-    console.log('time', @state.time)
     if @state.time
       @renderNotification()
     else
